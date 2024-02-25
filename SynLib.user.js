@@ -6,11 +6,16 @@
 // @match       https://portal.librus.pl/rodzina/synergia/loguj*
 // @match       https://api.librus.pl/OAuth/Authorization*
 // @match       https://synergia.librus.pl/uczen/index*
+//
 // @resource    login.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html
 // @resource    index.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/index.html
+//
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
 // @resource    Iconoir.css https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
+//
+// @resource    index.js https://raw.githubusercontent.com/Ja-Tar/SynLib/main/index.js
+//
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
 // @run-at      document-end
@@ -74,16 +79,34 @@ else {
         document.body.innerHTML = '';
 
         // Dodaj zachowane elementy oraz skrypty na początek nowego body
-        document.body.innerHTML += (
+        document.body.innerHTML += 
             scriptsToInject +
             importedBodyContent +
-            addTag('style', 'SynLib_login.css') +
-            addTag('style', 'SynLib_main.css') +
-            addTag('style', 'Iconoir.css')
-        );
+            addTagStyle('SynLib_main.css') +
+            addTagStyle('Iconoir.css');
 
         // Przenoszenie wartości
         document.getElementById("luckynumint").innerHTML = luckynumber.innerHTML;
+
+        // Link buttons
+        document.getElementById('index').addEventListener('click', function () {
+            window.location.href = '/uczen/index';
+        });
+        document.getElementById('oceny').addEventListener('click', function () {
+            window.location.href = '/przegladaj_oceny/uczen';
+        });
+        document.getElementById('nb').addEventListener('click', function () {
+            window.location.href = '/przegladaj_nb/uczen';
+        });
+        document.getElementById('wiadomosci').addEventListener('click', function () {
+            window.location.href = '/wiadomosci';
+        });
+        document.getElementById('ogloszenia').addEventListener('click', function () {
+            window.location.href = '/ogloszenia';
+        });
+        document.getElementById('zadania').addEventListener('click', function () {
+            window.location.href = '/moje_zadania';
+        });
     }
 
     function addStyleToFrame(cssStr, frmNode) {
@@ -95,7 +118,7 @@ else {
         targ.appendChild(newNode);
     }
 
-    function addTag(type, gm_text) {
-        return "<" + type + ">" + GM.getResourceText(gm_text) + "</" + type + ">";
+    function addTagStyle(gm_text) {
+        return "<style>" + GM.getResourceText(gm_text) + "</style>";
     }
 }
