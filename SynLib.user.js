@@ -51,6 +51,10 @@ else {
         });
     }
     if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
+        document.querySelectorAll('style, link[rel="stylesheet"]').forEach(function(element) {
+            element.remove();
+        });
+
         // Pobierz zawartość body z pobranego pliku HTML
         var importedBodyContent = GM.getResourceText('index.html');
 
