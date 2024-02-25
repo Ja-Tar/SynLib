@@ -125,7 +125,7 @@ button.highlighted:hover {
 
 .panelitem>div:not(.icon) {
     color: transparent;
-    width: 0 !important;
+    width: 0;
     white-space: nowrap;
     transition: width .3s, color .3s;
 }
@@ -141,9 +141,10 @@ button.highlighted:hover {
     background: #F46 !important;
 }
 
-.panelitem:hover {
-    background: rgb(0, 136, 73) !important;
+.panelitem:hover, .panelitem:hover>* {
+    background: #753440 !important;
     width: auto !important;
+    color: #222 !important;
 }
 
 .panelitem.active>* {
