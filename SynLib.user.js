@@ -4,7 +4,7 @@
 // @match       https://portal.librus.pl/rodzina/synergia/loguj*
 // @match       https://api.librus.pl/OAuth/Authorization*
 // @resource    login.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html
-// @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib.login.css
+// @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
 // @run-at      document-end
