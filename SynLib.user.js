@@ -8,7 +8,7 @@
 // @resource    index.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/index.html
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
-// @resource    Iconoir https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
+// @resource    Iconoir.css https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
 // @run-at      document-end
