@@ -1,0 +1,175 @@
+.gotoapp {
+	color:  #555;
+}
+.progress {
+	margin: 8px 0;
+	width: 80%;
+	max-width: 360px;
+	background: rgba(255, 34, 34, 0.25);
+	height: 4px;
+	overflow: hidden;
+	border-radius: 4px;
+}
+@keyframes wait {
+	0% {
+		width: 10%;
+		left: -10%;
+	}
+	100% {
+		width: 100%;
+		left: 100%;
+	}
+}
+#rebutstatus {
+	height: 100%;
+	background: #F33;
+	min-width: 0;
+	width: 0;
+	position: absolute;
+	left: 0;
+	animation: wait 2s infinite ease-in-out;
+	margin-right: auto;
+}
+.bar {
+	width: 0%;
+	float: left;
+	background: #F22;
+	max-width: 360px;
+	height: 4px;
+	transition: width 1.2s;
+}
+.progtext {
+	font-weight: bold;
+	display: inline;
+	color: #F22;
+}
+#loadavg {
+	color: #F44;
+}
+#dbusage {
+	color: #08F;
+}
+#loadavgbar {
+	background: #F44;
+}
+#dbusagebar {
+	background: #08F;
+}
+.moreless {
+	color: #FF0;
+}
+#maxusers {
+	font-family: monospace;
+	margin: 8px;
+	color: #FF0;
+	display: inline-block;
+}
+#userlimit {
+	color: #888;
+	margin-bottom: 6px;
+}
+#passbox {
+	font-size: 32px;
+	color: #222;
+	background: #F80;
+	font-family: monospace;
+	user-select: text;
+	padding: 16px 20px;
+	margin: 16px;
+	border-radius: 8px;
+	display: inline-block;
+	transition: box-shadow .3s;
+}
+#passbox:hover {
+	box-shadow: 0 0 20px #F80B;
+}
+.selectos > div {
+	display: inline-block;
+	background: #333;
+	max-width: 320px;
+	border-radius: 20px;
+	padding: 12px;
+	margin: 8px 4px;
+	font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: border-radius .3s;
+}
+.selectos > .selected {
+	color: #222;
+	border-radius: 12px;
+}
+.selectos > :not(.selected) {
+	background: #333 !important;
+}
+.forwho {
+	margin-bottom: 16px;
+	color: #888;
+}
+.forwho > b {
+	color: #EEE;
+}
+#accountlist {
+	max-width: 1080px;
+	flex-wrap: wrap;
+	display: flex;
+}
+.user {
+	display: flex;
+	min-width: 360px;
+	flex: 1;
+	margin: 8px;
+	align-items: center;
+	border: 1px solid #333;
+	padding: 12px 15px;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background .3s;
+}
+.user:hover {
+	background: #333;
+}
+.user img {
+	border-radius: 1000px;
+	object-fit: cover;
+	width: 80px;
+	height: 80px;
+}
+.user .info {
+	text-align: left;
+	margin-left: 16px;
+}
+.user .name {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 1px;
+}
+.username {
+	margin: 3px 0 4px;
+	background: #6AF;
+	user-select: none;
+	display: inline-block;
+	padding: 2px 4px;
+	border-radius: 4px;
+	color: #222;
+}
+.user .addition {
+	color: #888;
+	font-weight: bold;
+}
+#user .pic {
+	display: flex;
+	margin: 12px 0 16px;
+}
+#user img {
+	margin: 0 auto;
+	border-radius: 1000px;
+	object-fit: cover;
+	height: 240px;
+	width: 240px;
+	box-shadow: 2px 2px 10px #0008;
+}
+#user-fullname {
+	font-size: 32px;
+}
