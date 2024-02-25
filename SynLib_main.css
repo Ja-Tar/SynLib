@@ -112,6 +112,7 @@ button.highlighted:hover {
 .panelitem>* {
     display: inline-block;
     vertical-align: middle;
+    transition: background .3s;
 }
 
 .panelitem {
@@ -141,8 +142,8 @@ button.highlighted:hover {
     background: #F46 !important;
 }
 
-.panelitem:hover, .panelitem:hover>* {
-    background: #753440 !important;
+.panelitem:hover:not(.active), .panelitem:hover:not(.active)>* {
+    background: #a3273e !important;
     width: auto !important;
     color: #222 !important;
 }
