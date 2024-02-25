@@ -123,20 +123,6 @@ button.highlighted:hover {
     transition: background .3s;
 }
 
-.panelitem>div:not(.icon) {
-    color: transparent;
-    width: 0 !important;
-    white-space: nowrap;
-    transition: width .3s, color .3s;
-}
-
-.panelitem>.icon {
-    color: #888;
-    margin: 0;
-    font-size: 22px;
-    transition: color .3s;
-}
-
 .panelitem.active {
     background: #F46 !important;
 }
