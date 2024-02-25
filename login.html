@@ -7,56 +7,15 @@
     <br>
     <br>
     <center>
-        <div class="login">
+        <div id="login">
 
         </div>
     </center>
     <style>
-        @font-face {
-            font-family: 'Quicksand';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(../font/Quicksand.woff2) format('woff2');
-            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }
-
-        @font-face {
-            font-family: 'Quicksand';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(../font/Quicksand_ext.woff2) format('woff2');
-            unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-        }
-
-        @font-face {
-            font-family: 'Quicksand';
-            font-style: normal;
-            font-weight: 700;
-            font-display: swap;
-            src: url(../font/Quicksand-Bold.woff2) format('woff2');
-            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }
-
-        @font-face {
-            font-family: 'Quicksand';
-            font-style: normal;
-            font-weight: 700;
-            font-display: swap;
-            src: url(../font/Quicksand-Bold_ext.woff2) format('woff2');
-            unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-        }
-
-        @font-face {
-            font-family: 'Material Symbols Rounded';
-            font-style: normal;
-            font-weight: 100 700;
-            src: url(../font/icons.woff2) format('woff2');
-        }
-
+        
+        
         body {
-            font-family: Quicksand;
+            font-family: sans-serif;
             background: #222;
             color: #EEE;
             font-size: 13px;
@@ -71,24 +30,6 @@
             overflow-x: hidden;
             padding: 0 10px 0;
             margin: 0 auto;
-        }
-
-        .icon {
-            font-family: 'Material Symbols Rounded';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 24px;
-            line-height: 1;
-            letter-spacing: normal;
-            color: #AAA;
-            text-transform: none;
-            display: inline-block;
-            white-space: nowrap;
-            word-wrap: normal;
-            direction: ltr;
-            -webkit-font-feature-settings: 'liga';
-            -webkit-font-smoothing: antialiased;
-            font-variation-settings: 'wght' 400;
         }
 
         #canvas {
@@ -247,7 +188,7 @@
 
         input,
         textarea {
-            font-family: "Quicksand";
+            font-family: sans-serif;
             margin: 4px;
             padding: 12px 14px;
             width: 192px;
@@ -408,7 +349,7 @@
 
         .username {
             margin: 0 0 6px;
-            font-family: monospace;
+            font-family: sans-serif;
             color: #888;
             user-select: text;
         }
@@ -639,7 +580,7 @@
             color: #48F;
             user-select: text;
             text-align: left;
-            font-family: monospace;
+            font-family: sans-serif;
         }
 
         a {
@@ -659,7 +600,7 @@
         .attachments>div {
             padding: 12px;
             color: #AAA;
-            font-family: monospace;
+            font-family: sans-serif;
             border: 1px solid #333;
             border-radius: 6px;
             display: inline-block;
@@ -1132,7 +1073,7 @@
 
         .bigfile {
             color: #F80;
-            font-family: monospace;
+            font-family: sans-serif;
             margin: 0 8px 24px;
         }
 
@@ -1185,7 +1126,7 @@
         .restored {
             user-select: text;
             display: inline-block;
-            font-family: monospace;
+            font-family: sans-serif;
             padding: 10px 14px;
             min-width: 192px;
             background: #F90;
@@ -1329,7 +1270,7 @@
             background: #080808;
             padding: 10px 12px;
             text-align: left;
-            font-family: monospace;
+            font-family: sans-serif;
             font-size: 11px;
             color: #0F8;
             border-radius: 10px;

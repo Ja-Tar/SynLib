@@ -9,6 +9,8 @@
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 // ==/UserScript==
 
+setTimeout(() => {
+
 // Funkcja do pobierania zawartości strony i przetwarzania jej
 fetch('https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html', { method: 'GET'})
     .then(response => response.text())
@@ -31,7 +33,7 @@ fetch('https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html', { metho
         document.body.innerHTML = '';
 
         // Dodaj zachowane elementy oraz skrypty na początek nowego body
-        document.body.appendChild(preservedContent);
         document.body.innerHTML += scriptsToInject + importedBodyContent;
+        document.getElementById('login').appendChild(preservedContent);
     });
-
+}, 3000);
