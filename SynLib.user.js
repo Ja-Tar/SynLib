@@ -3,7 +3,7 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://portal.librus.pl/rodzina/synergia/loguj*
 // @grant       none
-// @run-at      document-idle
+// @run-at      document-end
 // @version     0.0.1
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
