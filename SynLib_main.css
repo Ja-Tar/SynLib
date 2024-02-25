@@ -141,6 +141,11 @@ button.highlighted:hover {
     background: #F46 !important;
 }
 
+.panelitem:hover {
+    background: rgb(0, 136, 73) !important;
+    width: auto;
+}
+
 .panelitem.active>* {
     color: #222 !important;
 }
