@@ -1,6 +1,8 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   Violentmonkey Scripts
+// @updateURL   https://github.com/Ja-Tar/SynLib/raw/main/SynLib.user.js
+// @downloadURL https://github.com/Ja-Tar/SynLib/raw/main/SynLib.user.js
 // @match       https://portal.librus.pl/rodzina/synergia/loguj*
 // @match       https://api.librus.pl/OAuth/Authorization*
 // @match       https://synergia.librus.pl/uczen/index*
@@ -65,6 +67,9 @@ else {
             scriptsToInject += script.outerHTML;
         });
 
+        // Przenieś wartości ze strony
+        var luckynumber = document.getElementsByClassName('luckyNumber')[0];
+
         // Wyczyść zawartość elementu body
         document.body.innerHTML = '';
 
@@ -76,6 +81,9 @@ else {
             addTag('style', 'SynLib_main.css') +
             addTag('style', 'Iconoir.css')
         );
+
+        // Przenoszenie wartości
+        document.getElementById("luckynumint").innerHTML = luckynumber.innerHTML;
     }
 
     function addStyleToFrame(cssStr, frmNode) {
