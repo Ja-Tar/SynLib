@@ -143,7 +143,7 @@ button.highlighted:hover {
 
 .panelitem:hover {
     background: rgb(0, 136, 73) !important;
-    width: auto;
+    width: auto !important;
 }
 
 .panelitem.active>* {
