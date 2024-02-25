@@ -5,6 +5,7 @@
 // @match       https://api.librus.pl/OAuth/Authorization*
 // @resource    login.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
+// @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
 // @run-at      document-end
@@ -38,7 +39,7 @@ else {
         document.body.innerHTML = '';
 
         // Dodaj zachowane elementy oraz skrypty na początek nowego body
-        document.body.innerHTML += scriptsToInject + importedBodyContent;
+        document.body.innerHTML += scriptsToInject + importedBodyContent + "<style>" + GM.getResourceText('SynLib_main.css') + "</style>";
         document.getElementById('login').appendChild(preservedContent);
 
         // Pobranie elementu iframe
