@@ -2,5 +2,5 @@ body, header .title {
     background: #222 !important;
 }
 label, h2 {
-    color: azure;
+    color: azure !important;
 }
