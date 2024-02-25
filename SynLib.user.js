@@ -51,7 +51,7 @@ else {
         });
     }
     if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
-        document.querySelectorAll('style, link[rel="stylesheet"]').forEach(function(element) {
+        document.querySelectorAll('style, link[rel="stylesheet"]').forEach(function (element) {
             element.remove();
         });
 
@@ -69,7 +69,13 @@ else {
         document.body.innerHTML = '';
 
         // Dodaj zachowane elementy oraz skrypty na początek nowego body
-        document.body.innerHTML += scriptsToInject + importedBodyContent + "<style>" + GM.getResourceText('SynLib_main.css') + "</style>" + "<style>" + GM.getResourceText('Iconoir.css') + "</style>";
+        document.body.innerHTML += (
+            scriptsToInject +
+            importedBodyContent +
+            addTag('style', 'SynLib_login.css') +
+            addTag('style', 'SynLib_main.css') +
+            addTag('style', 'Iconoir.css')
+        );
     }
 
     function addStyleToFrame(cssStr, frmNode) {
@@ -79,5 +85,9 @@ else {
 
         var targ = D.getElementsByTagName('head')[0] || D.body || D.documentElement;
         targ.appendChild(newNode);
+    }
+
+    function addTag(type, gm_text) {
+        return "<" + type + ">" + GM.getResourceText(gm_text) + "</" + type + ">";
     }
 }
