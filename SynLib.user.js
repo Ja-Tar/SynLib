@@ -13,13 +13,10 @@
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
 // @resource    Iconoir.css https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
-//
-// @resource    index.js https://raw.githubusercontent.com/Ja-Tar/SynLib/main/index.js
-//
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
 // @run-at      document-end
-// @version     0.0.4
+// @version     0.0.5
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 // ==/UserScript==
