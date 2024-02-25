@@ -3,13 +3,16 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://portal.librus.pl/rodzina/synergia/loguj*
 // @match       https://api.librus.pl/OAuth/Authorization*
+// @match       https://synergia.librus.pl/uczen/index*
 // @resource    login.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html
+// @resource    index.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/index.html
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
+// @resource    Iconoir https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
 // @run-at      document-end
-// @version     0.0.1
+// @version     0.0.3
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 // ==/UserScript==
@@ -18,11 +21,38 @@ if (window.top !== window.self) {
     GM.addStyle(GM.getResourceText('SynLib_login.css'));
 }
 else {
-    // Nasłuchiwanie na załadowanie się elementu iframe
-    document.getElementById('caLoginIframe').addEventListener('load', function () {
+    if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
+        document.getElementById('caLoginIframe').addEventListener('load', function () {
+            // Pobierz zawartość body z pobranego pliku HTML
+            var importedBodyContent = GM.getResourceText('login.html');
 
+            // Przeskanuj oryginalną zawartość strony i dodaj wszystkie skrypty na początek nowego body
+            var originalScripts = document.querySelectorAll('script');
+            var scriptsToInject = '';
+            originalScripts.forEach(script => {
+                scriptsToInject += script.outerHTML;
+            });
+
+            // Skopiuj zawartość elementu do zachowania
+            var elementDoZachowania = document.getElementById('caLoginIframe');
+            var preservedContent = elementDoZachowania.cloneNode(true);
+
+            // Wyczyść zawartość elementu body
+            document.body.innerHTML = '';
+
+            // Dodaj zachowane elementy oraz skrypty na początek nowego body
+            document.body.innerHTML += scriptsToInject + importedBodyContent + "<style>" + GM.getResourceText('SynLib_main.css') + "</style>";
+            document.getElementById('login').appendChild(preservedContent);
+
+            // Pobranie elementu iframe
+            var iframe = document.getElementById('caLoginIframe');
+
+            addStyleToFrame('body { background: #222; }', iframe);
+        });
+    }
+    if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
         // Pobierz zawartość body z pobranego pliku HTML
-        var importedBodyContent = GM.getResourceText('login.html');
+        var importedBodyContent = GM.getResourceText('index.html');
 
         // Przeskanuj oryginalną zawartość strony i dodaj wszystkie skrypty na początek nowego body
         var originalScripts = document.querySelectorAll('script');
@@ -31,22 +61,12 @@ else {
             scriptsToInject += script.outerHTML;
         });
 
-        // Skopiuj zawartość elementu do zachowania
-        var elementDoZachowania = document.getElementById('caLoginIframe');
-        var preservedContent = elementDoZachowania.cloneNode(true);
-
         // Wyczyść zawartość elementu body
         document.body.innerHTML = '';
 
         // Dodaj zachowane elementy oraz skrypty na początek nowego body
-        document.body.innerHTML += scriptsToInject + importedBodyContent + "<style>" + GM.getResourceText('SynLib_main.css') + "</style>";
-        document.getElementById('login').appendChild(preservedContent);
-
-        // Pobranie elementu iframe
-        var iframe = document.getElementById('caLoginIframe');
-
-        addStyleToFrame('body { background: #222; }', iframe);
-    });
+        document.body.innerHTML += scriptsToInject + importedBodyContent + "<style>" + GM.getResourceText('SynLib_main.css') + "</style>" + "<style>" + GM.getResourceText('Iconoir.css') + "</style>";
+    }
 
     function addStyleToFrame(cssStr, frmNode) {
         var D = frmNode.contentDocument;
