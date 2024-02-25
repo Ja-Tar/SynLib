@@ -12,7 +12,7 @@
 setTimeout(() => {
 
 // Funkcja do pobierania zawartości strony i przetwarzania jej
-fetch('https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html', { method: 'GET'})
+fetch('https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html')
     .then(response => response.text())
     .then(html => {
         // Pobierz zawartość body z pobranego pliku HTML
