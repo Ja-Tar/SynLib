@@ -12,7 +12,7 @@
 // @match       https://synergia.librus.pl/uczen/index*
 //
 // @resource    login.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html
-// @resource    index.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/index.html
+// @resource    ribbon.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/ribbon.html
 //
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
@@ -88,6 +88,12 @@ else {
         });
     }
     if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
+        // Usuń wszystkie elementy <style>
+        document.querySelectorAll('style').forEach(style => style.remove());
+
+        // Usuń wszystkie linki do arkuszy stylów
+        document.querySelectorAll('link[rel="stylesheet"]').forEach(link => link.remove());
+
 
         if (TrybJanosc !== true) {
             getFile('SynLib_main.css').then(
@@ -102,7 +108,7 @@ else {
         document.getElementById('footer').remove();
         document.getElementById('body').innerHTML = '';
         getFile('ribbon.html').then(html => document.getElementById('top-banner-container').innerHTML = html);
-
+        //document.getElementById('fancybox-tmp')
         // dodać tutaj modyfikacje treści (usuwanie elementów, dodawanie elementów itp.)
     }
 }
