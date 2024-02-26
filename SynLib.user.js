@@ -1,8 +1,13 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   Violentmonkey Scripts
+// @version     0.0.6
+// @author      JaTar
+// @description Teraz to wygląda! Poprawia wygląd Librusa.
+//
 // @updateURL   https://github.com/Ja-Tar/SynLib/raw/main/SynLib.user.js
-// @downloadURL https://github.com/Ja-Tar/SynLib/raw/main/SynLib.user.js
+// @downloadURL https://github.com/Ja-Tar/SynLib
+//
 // @match       https://portal.librus.pl/rodzina/synergia/loguj*
 // @match       https://api.librus.pl/OAuth/Authorization*
 // @match       https://synergia.librus.pl/uczen/index*
@@ -13,13 +18,29 @@
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
 // @resource    Iconoir.css https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
+//
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
+// @grant       GM.xmlHttpRequest
+//
 // @run-at      document-end
-// @version     0.0.5
-// @author      JaTar
-// @description Teraz to wygląda! Poprawia wygląd Librusa.
 // ==/UserScript==
+
+var GMLoadedLevel;
+
+// Sprawdź czy wszystkie GM są dostępne
+if (GM.addStyle | GM.getResourceText) {
+    console.log('Wszystkie GM. zostały załadowane');
+    GMLoadedLevel = 2;
+} else if (GM.addStyle) {
+    console.warn('Brak API -> GM.getResourceText');
+    console.log('Zmiana na GM_xmlHttpRequest')
+    GMLoadedLevel = 1;
+} else if (GM.getResourceText) {
+    throw new Error('Brak wymaganego API -> GM.addStyle');
+} else {
+    throw new Error('Brak wymaganych API GM. -> Potrzebne są GM.addStyle i GM.getResourceText');
+}
 
 if (window.top !== window.self) {
     GM.addStyle(GM.getResourceText('SynLib_login.css'));
@@ -27,7 +48,13 @@ if (window.top !== window.self) {
 else {
     if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
         document.getElementById('caLoginIframe').addEventListener('load', function () {
+
             // Pobierz zawartość body z pobranego pliku HTML
+            if (GMLoadedLevel === 1) {
+                var importedBodyContent = GM.xmlHttpRequest({
+                    url: 'https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html',
+                })
+            }
             var importedBodyContent = GM.getResourceText('login.html');
 
             // Przeskanuj oryginalną zawartość strony i dodaj wszystkie skrypty na początek nowego body
@@ -86,9 +113,9 @@ else {
         document.getElementById("luckynumint").innerHTML = luckynumber.innerHTML;
 
         // Link buttons
-        document.getElementById('index').addEventListener('click', function () {
-            window.location.href = '/uczen/index';
-        });
+        //document.getElementById('index').addEventListener('click', function () {
+        //    window.location.href = '/uczen/index';
+        //});
         document.getElementById('oceny').addEventListener('click', function () {
             window.location.href = '/przegladaj_oceny/uczen';
         });
