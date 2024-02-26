@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   Violentmonkey Scripts
-// @version     0.0.6
+// @version     0.0.7
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -25,6 +25,11 @@
 //
 // @run-at      document-end
 // ==/UserScript==
+
+// Skip home page
+if (location.hostname === 'portal.librus.pl' && location.pathname != "/rodzina/synergia/loguj") {
+    location.replace("/rodzina/synergia/loguj");
+}
 
 var GMLoadedLevel;
 
@@ -55,7 +60,9 @@ else {
                     url: 'https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html',
                 })
             }
-            var importedBodyContent = GM.getResourceText('login.html');
+            else {
+                var importedBodyContent = GM.getResourceText('login.html');
+            }
 
             // Przeskanuj oryginalną zawartość strony i dodaj wszystkie skrypty na początek nowego body
             var originalScripts = document.querySelectorAll('script');
