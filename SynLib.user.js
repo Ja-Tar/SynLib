@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   Violentmonkey Scripts
-// @version     0.0.8
+// @version     0.0.9
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -31,40 +31,35 @@ if (location.hostname === 'portal.librus.pl' && location.pathname != "/rodzina/s
 }
 
 var GMLoadedLevel;
+var TrybJanosc = false;
 
 // Sprawdź czy wszystkie GM są dostępne
-if (GM.addStyle && GM.getResourceText) {
+if (GM.getResourceText && GM.addStyle && GM.xmlHttpRequest) {
     console.log('Wszystkie GM. zostały załadowane');
     GMLoadedLevel = 2;
-} else if (GM.addStyle) {
+} else if (GM.addStyle && GM.xmlHttpRequest) {
     console.warn('Brak API -> GM.getResourceText');
     console.log('Zmiana na GM_xmlHttpRequest')
     GMLoadedLevel = 1;
-} else if (GM.getResourceText) {
-    throw new Error('Brak wymaganego API -> GM.addStyle');
+} else if (GM.getResourceText || GM.addStyle) {
+    throw new Error('Brak wymaganych API');
 } else {
     throw new Error('Brak wymaganych API GM. -> Potrzebne są GM.addStyle i GM.getResourceText');
 }
 
 if (window.top !== window.self) {
-    GM.addStyle(GM.getResourceText('SynLib_login.css'));
+    if (TrybJanosc !== true) {
+        getFile('SynLib_login.css').then(stle => {
+            GM.addStyle(stle);
+        });
+    }
 }
 else {
     if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
         document.getElementById('caLoginIframe').addEventListener('load', function () {
             // Pobierz zawartość body z pobranego pliku HTML
-            if (GMLoadedLevel === 1) {
-                GM.xmlHttpRequest({
-                    method: "GET",
-                    url: "https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html",
-                    onload: function (response) {
-                        _changeBodyLogin(response.responseText);
-                    }
-                })
-            }
-            else {
-                _changeBodyLogin(GM.getResourceText('login.html'));
-            }
+
+            getFile('login.html').then(importedBodyContent => _changeBodyLogin(importedBodyContent));
 
             function _changeBodyLogin(importedBodyContent) {
                 // Przeskanuj oryginalną zawartość strony i dodaj wszystkie skrypty na początek nowego body
@@ -82,78 +77,66 @@ else {
                 document.body.innerHTML = '';
 
                 // Dodaj zachowane elementy oraz skrypty na początek nowego body
-                document.body.innerHTML += scriptsToInject + importedBodyContent + "<style>" + GM.getResourceText('SynLib_main.css') + "</style>";
+                document.body.innerHTML += scriptsToInject + importedBodyContent;
+                if (TrybJanosc !== true) {
+                    getFile('SynLib_main.css').then(
+                        stle => GM.addStyle(stle)
+                    );
+                }
                 document.getElementById('login').appendChild(preservedContent);
-
-                // Pobranie elementu iframe
-                var iframe = document.getElementById('caLoginIframe');
-
-                addStyleToFrame('body { background: #222; }', iframe);
             }
         });
     }
     if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
-        document.querySelectorAll('style, link[rel="stylesheet"]').forEach(function (element) {
-            element.remove();
-        });
 
-        // Pobierz zawartość body z pobranego pliku HTML
-        var importedBodyContent = GM.getResourceText('index.html');
+        if (TrybJanosc !== true) {
+            getFile('SynLib_main.css').then(
+                stle => GM.addStyle(stle)
+            );
+            getFile('Iconoir.css').then(
+                stle => GM.addStyle(stle)
+            );
+        }
 
-        // Przeskanuj oryginalną zawartość strony i dodaj wszystkie skrypty na początek nowego body
-        var originalScripts = document.querySelectorAll('script');
-        var scriptsToInject = '';
-        originalScripts.forEach(script => {
-            scriptsToInject += script.outerHTML;
-        });
-
-        // Przenieś wartości ze strony
-        var luckynumber = document.getElementsByClassName('luckyNumber')[0];
-
-        // Wyczyść zawartość elementu body
-        document.body.innerHTML = '';
-
-        // Dodaj zachowane elementy oraz skrypty na początek nowego body
-        document.body.innerHTML +=
-            scriptsToInject +
-            importedBodyContent +
-            addTagStyle('SynLib_main.css') +
-            addTagStyle('Iconoir.css');
-
-        // Przenoszenie wartości
-        document.getElementById("luckynumint").innerHTML = luckynumber.innerHTML;
-
-        // Link buttons
-        //document.getElementById('index').addEventListener('click', function () {
-        //    window.location.href = '/uczen/index';
-        //});
-        document.getElementById('oceny').addEventListener('click', function () {
-            window.location.href = '/przegladaj_oceny/uczen';
-        });
-        document.getElementById('nb').addEventListener('click', function () {
-            window.location.href = '/przegladaj_nb/uczen';
-        });
-        document.getElementById('wiadomosci').addEventListener('click', function () {
-            window.location.href = '/wiadomosci';
-        });
-        document.getElementById('ogloszenia').addEventListener('click', function () {
-            window.location.href = '/ogloszenia';
-        });
-        document.getElementById('zadania').addEventListener('click', function () {
-            window.location.href = '/moje_zadania';
-        });
+        // dodać tutaj modyfikacje treści (usuwanie elementów, dodawanie elementów itp.)
     }
 }
 
-function addStyleToFrame(cssStr, frmNode) {
-    var D = frmNode.contentDocument;
-    var newNode = D.createElement('style');
-    newNode.textContent = cssStr;
-
-    var targ = D.getElementsByTagName('head')[0] || D.body || D.documentElement;
-    targ.appendChild(newNode);
+async function GetXMLHttpRequest(url) {
+    return new Promise((resolve, reject) => {
+        GM.xmlHttpRequest({
+            method: "GET",
+            url: url,
+            onload: function (response) {
+                resolve(response.responseText);
+            },
+            onerror: function (error) {
+                reject(error);
+            }
+        });
+    });
 }
 
-function addTagStyle(gm_text) {
-    return "<style>" + GM.getResourceText(gm_text) + "</style>";
+async function getFile(filename) {
+    if (GMLoadedLevel === 1) {
+        try {
+            const responseData = await GetXMLHttpRequest("https://raw.githubusercontent.com/Ja-Tar/SynLib/main/" + filename);
+            return responseData;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    } else {
+        return GM.getResourceText(filename);
+    }
+}
+
+async function addTagStyle(gm_text) {
+    try {
+        const importedStyleContent = await getFile(gm_text, GMLoadedLevel);
+        return "<style>" + importedStyleContent + "</style>";
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
