@@ -98,6 +98,11 @@ else {
             );
         }
 
+        document.getElementById('cookieBox').remove();
+        document.getElementById('footer').remove();
+        document.getElementById('body').innerHTML = '';
+        getFile('ribbon.html').then(html => document.getElementById('top-banner-container').innerHTML = html);
+
         // dodać tutaj modyfikacje treści (usuwanie elementów, dodawanie elementów itp.)
     }
 }
