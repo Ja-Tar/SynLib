@@ -146,6 +146,10 @@ button.highlighted:hover {
     outline: none;
 }
 
+.panelitem.activewindow::before {
+    opacity: 1;
+}
+
 .panelitem::before {
     content: "";
     position: absolute;
