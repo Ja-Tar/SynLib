@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   Violentmonkey Scripts
-// @version     0.0.10
+// @version     0.0.11
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -109,27 +109,29 @@ else {
         document.getElementById('footer').remove();
         document.getElementById('body').innerHTML = '';
         document.getElementById('main-navigation-container').remove();
-        getFile('ribbon.html').then(html => document.getElementById('top-banner-container').innerHTML = html);
+        getFile('ribbon.html').then(html => {
+            document.getElementById('top-banner-container').innerHTML = html;
 
-        document.getElementById('index').addEventListener('click', function () {
-            window.location.href = '/uczen/index';
+            //document.getElementById('index').addEventListener('click', function () {
+            //    window.location.href = '/uczen/index';
+            //});
+            document.getElementById('oceny').addEventListener('click', function () {
+                window.location.href = '/przegladaj_oceny/uczen';
+            });
+            document.getElementById('frekwencja').addEventListener('click', function () {
+                window.location.href = '/przegladaj_nb/uczen';
+            });
+            document.getElementById('wiadomosci').addEventListener('click', function () {
+                window.location.href = '/wiadomosci';
+            });
+            document.getElementById('ogloszenia').addEventListener('click', function () {
+                window.location.href = '/ogloszenia';
+            });
+            document.getElementById('zadania').addEventListener('click', function () {
+                window.location.href = '/moje_zadania';
+            });
         });
-        document.getElementById('oceny').addEventListener('click', function () {
-            window.location.href = '/przegladaj_oceny/uczen';
-        });
-        document.getElementById('frekwencja').addEventListener('click', function () {
-            window.location.href = '/przegladaj_nb/uczen';
-        });
-        document.getElementById('wiadomosci').addEventListener('click', function () {
-            window.location.href = '/wiadomosci';
-        });
-        document.getElementById('ogloszenia').addEventListener('click', function () {
-            window.location.href = '/ogloszenia';
-        });
-        document.getElementById('zadania').addEventListener('click', function () {
-            window.location.href = '/moje_zadania';
-        });
-
+        
         // dodać tutaj modyfikacje treści (usuwanie elementów, dodawanie elementów itp.)
     }
 }
