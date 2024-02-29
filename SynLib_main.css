@@ -158,10 +158,6 @@ button.highlighted:hover {
 }
 
 .panelitem div {
-    width: 15px;
-}
-
-#panelitem>.icon {
     font-size: medium;
 }
 

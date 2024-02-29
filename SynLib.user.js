@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   Violentmonkey Scripts
-// @version     0.0.11
+// @version     0.0.12
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -22,6 +22,8 @@
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
 // @grant       GM.xmlHttpRequest
+// @grant       GM.setValue
+// @grant       GM.getValue
 //
 // @run-at      document-end
 // ==/UserScript==
@@ -117,6 +119,7 @@ else {
             connectRibbonButtons();
         });
 
+        saveAfterLoginData();
         // dodać tutaj modyfikacje treści (usuwanie elementów, dodawanie elementów itp.)
     }
 }
@@ -170,7 +173,7 @@ async function getDataFromLibrusAPI(endpoint) {
             'Referer': document.referrer,
             'Sec-GPC': '1',
             'Connection': 'keep-alive',
-            'Credential': 'include',
+            'Credentials': 'include',
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
             'Sec-Fetch-Site': 'same-origin',
@@ -185,7 +188,18 @@ async function getDataFromLibrusAPI(endpoint) {
 }
 
 async function saveAfterLoginData() {
-    
+    getDataFromLibrusAPI('Me').then(data => {
+        GM.setValue('Me', data['Me']);
+    });
+    getDataFromLibrusAPI('UserProfile').then(data => {
+        //GM.setValue('UserProfile', data['UserProfile']);
+        console.log(data);
+    });
+    getDataFromLibrusAPI('Classes').then(data => {
+        //GM.setValue('Classes', data['Classes']);
+        console.log(data);
+    })
+
 }
 
 function connectRibbonButtons() {
