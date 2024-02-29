@@ -118,10 +118,6 @@ button.highlighted:hover {
     padding-left: 10px;
 }
 
-#panel>.icon {
-    font-size: medium;
-}
-
 .panelitem {
     background-color: transparent;
     border: none;
@@ -165,6 +161,9 @@ button.highlighted:hover {
     width: 15px;
 }
 
+#panelitem>.icon {
+    font-size: medium;
+}
 
 .unclickable {
     cursor: default !important;
