@@ -56,6 +56,7 @@ if (window.top !== window.self) {
     }
 }
 else {
+    // Strona logowania
     if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
         document.getElementById('caLoginIframe').addEventListener('load', function () {
             // Pobierz zawartość body z pobranego pliku HTML
@@ -88,6 +89,7 @@ else {
             }
         });
     }
+    // Strona główna
     if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
         // Usuń wszystkie elementy <style>
         document.querySelectorAll('style').forEach(style => style.remove());
@@ -109,11 +111,12 @@ else {
         document.getElementById('footer').remove();
         document.getElementById('body').innerHTML = '';
         document.getElementById('main-navigation-container').remove();
+        document.getElementById('user-section').remove();
         getFile('ribbon.html').then(html => {
             document.getElementById('top-banner-container').innerHTML = html;
             connectRibbonButtons();
         });
-        
+
         // dodać tutaj modyfikacje treści (usuwanie elementów, dodawanie elementów itp.)
     }
 }
@@ -167,7 +170,7 @@ async function getDataFromLibrusAPI(endpoint) {
             'Referer': document.referrer,
             'Sec-GPC': '1',
             'Connection': 'keep-alive',
-            'Cookie': document.cookie,
+            'Credential': 'include',
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
             'Sec-Fetch-Site': 'same-origin',
@@ -181,15 +184,8 @@ async function getDataFromLibrusAPI(endpoint) {
     return json;
 }
 
-async function getThisYearEndYear() {
-    // https://date.nager.at/api/v3/PublicHolidays/2024/PL
-
-    await GM.GetXMLHttpRequest(`https://date.nager.at/api/v3/PublicHolidays/${new Date().getFullYear()}/PL`).then(response => {
-        const json = JSON.parse(response);
-        var thisYearEndYear = json[0].date;
-
-
-    })
+async function saveAfterLoginData() {
+    
 }
 
 function connectRibbonButtons() {

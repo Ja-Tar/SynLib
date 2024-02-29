@@ -115,6 +115,11 @@ button.highlighted:hover {
     width: auto;
     border-radius: 5px;
     align-items: center;
+    padding-left: 10px;
+}
+
+#panel>.icon {
+    font-size: medium;
 }
 
 .panelitem {
