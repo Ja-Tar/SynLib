@@ -111,25 +111,7 @@ else {
         document.getElementById('main-navigation-container').remove();
         getFile('ribbon.html').then(html => {
             document.getElementById('top-banner-container').innerHTML = html;
-
-            //document.getElementById('index').addEventListener('click', function () {
-            //    window.location.href = '/uczen/index';
-            //});
-            document.getElementById('oceny').addEventListener('click', function () {
-                window.location.href = '/przegladaj_oceny/uczen';
-            });
-            document.getElementById('frekwencja').addEventListener('click', function () {
-                window.location.href = '/przegladaj_nb/uczen';
-            });
-            document.getElementById('wiadomosci').addEventListener('click', function () {
-                window.location.href = '/wiadomosci';
-            });
-            document.getElementById('ogloszenia').addEventListener('click', function () {
-                window.location.href = '/ogloszenia';
-            });
-            document.getElementById('zadania').addEventListener('click', function () {
-                window.location.href = '/moje_zadania';
-            });
+            connectRibbonButtons();
         });
         
         // dodać tutaj modyfikacje treści (usuwanie elementów, dodawanie elementów itp.)
@@ -173,4 +155,93 @@ async function addTagStyle(gm_text) {
         console.error(error);
         return null;
     }
+}
+
+async function getDataFromLibrusAPI(endpoint) {
+    const url = `https://synergia.librus.pl/gateway/api/2.0/${endpoint}`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Host': 'synergia.librus.pl',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Referer': document.referrer,
+            'Sec-GPC': '1',
+            'Connection': 'keep-alive',
+            'Cookie': document.cookie,
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-origin',
+            'DNT': '1',
+            'User-Agent': navigator.userAgent,
+            'Accept': 'application/json, text/plain, */*',
+            'Accept-Language': 'pl,en;q=0.5'
+        }
+    });
+    const json = await response.json();
+    return json;
+}
+
+async function getThisYearEndYear() {
+    // https://date.nager.at/api/v3/PublicHolidays/2024/PL
+
+    await GM.GetXMLHttpRequest(`https://date.nager.at/api/v3/PublicHolidays/${new Date().getFullYear()}/PL`).then(response => {
+        const json = JSON.parse(response);
+        var thisYearEndYear = json[0].date;
+
+
+    })
+}
+
+function connectRibbonButtons() {
+    const currentPage = window.location.pathname
+
+    const index = document.getElementById('index')
+    const oceny = document.getElementById('oceny')
+    const frekwencja = document.getElementById('frekwencja')
+    const wiadomosci = document.getElementById('wiadomosci')
+    const ogloszenia = document.getElementById('ogloszenia')
+    const zadania = document.getElementById('zadania')
+
+    index.addEventListener('click', function () {
+        window.location.href = '/uczen/index';
+    });
+    oceny.addEventListener('click', function () {
+        window.location.href = '/przegladaj_oceny/uczen';
+    });
+    frekwencja.addEventListener('click', function () {
+        window.location.href = '/przegladaj_nb/uczen';
+    });
+    wiadomosci.addEventListener('click', function () {
+        window.location.href = '/wiadomosci';
+    });
+    ogloszenia.addEventListener('click', function () {
+        window.location.href = '/ogloszenia';
+    });
+    zadania.addEventListener('click', function () {
+        window.location.href = '/moje_zadania';
+    });
+
+    switch(currentPage) {
+        case '/uczen/index':
+            index.disabled = true;
+            break;
+        case '/przegladaj_oceny/uczen':
+            oceny.disabled = true;
+            break;
+        case '/przegladaj_nb/uczen':
+            frekwencja.disabled = true;
+            break;
+        case '/wiadomosci':
+            wiadomosci.disabled = true;
+            break;
+        case '/ogloszenia':
+            ogloszenia.disabled = true;
+            break;
+        case '/moje_zadania':
+            zadania.disabled = true;
+            break;
+        default:
+            break;
+    }
+    
 }

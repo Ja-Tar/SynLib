@@ -135,19 +135,9 @@ button.highlighted:hover {
     background-color: #21262c;
 }
 
-.panelitem:focus,
-.panelitem:active {
+.panelitem:disabled {
     background-color: #1a1f24;
     outline: none;
-}
-
-.panelitem.activewindow {
-    background-color: #1a1f24;
-    outline: none;
-}
-
-.panelitem.activewindow::before {
-    opacity: 1;
 }
 
 .panelitem::before {
@@ -162,8 +152,7 @@ button.highlighted:hover {
     opacity: 0;
 }
 
-.panelitem:focus::before,
-.panelitem:active::before {
+.panelitem:disabled::before {
     opacity: 1;
 }
 
