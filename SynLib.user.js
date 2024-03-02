@@ -99,15 +99,12 @@ else {
         // Usuń wszystkie linki do arkuszy stylów
         document.querySelectorAll('link[rel="stylesheet"]').forEach(link => link.remove());
 
-
-        if (TrybJanosc !== true) {
-            getFile('SynLib_main.css').then(
-                stle => GM.addStyle(stle)
-            );
-            getFile('Iconoir.css').then(
-                stle => GM.addStyle(stle)
-            );
-        }
+        getFile('SynLib_main.css').then(
+            stle => GM.addStyle(stle)
+        );
+        getFile('Iconoir.css').then(
+            stle => GM.addStyle(stle)
+        );
 
         document.getElementById('cookieBox').remove();
         document.getElementById('footer').remove();
@@ -119,7 +116,9 @@ else {
             connectRibbonButtons();
         });
 
-        saveAfterLoginData();
+        if (sessionStorage.getItem('SavedAfterLogin') !== true) {
+            saveAfterLoginData();
+        }
         // dodać tutaj modyfikacje treści (usuwanie elementów, dodawanie elementów itp.)
     }
 }
@@ -188,18 +187,49 @@ async function getDataFromLibrusAPI(endpoint) {
 }
 
 async function saveAfterLoginData() {
-    getDataFromLibrusAPI('Me').then(data => {
-        GM.setValue('Me', data['Me']);
-    });
-    getDataFromLibrusAPI('UserProfile').then(data => {
-        //GM.setValue('UserProfile', data['UserProfile']);
-        console.log(data);
-    });
-    getDataFromLibrusAPI('Classes').then(data => {
-        //GM.setValue('Classes', data['Classes']);
-        console.log(data);
-    })
+    try {
+        await getDataFromLibrusAPI('Me').then(data => {
+            sessionStorage.setItem('Me', JSON.stringify(data['Me']['Account']));
+        });
+        await getDataFromLibrusAPI('UserProfile').then(data => {
+            sessionStorage.setItem('UserProfile', JSON.stringify(data['UserProfile']));
+        });
+        await getDataFromLibrusAPI('Classes').then(data => {
+            sessionStorage.setItem('Classes', JSON.stringify(data['Class']));
+        });
+        sessionStorage.setItem('SavedAfterLogin', true);
+    } catch (error) {
+        try {
+            console.warn(error);
+            await refreshToken();
+            await saveAfterLoginData();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
 
+async function refreshToken() {
+    // https://synergia.librus.pl/refreshToken
+    const url = 'https://synergia.librus.pl/refreshToken';
+    await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Host': 'synergia.librus.pl',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Referer': document.referrer,
+            'Sec-GPC': '1',
+            'Connection': 'keep-alive',
+            'Credentials': 'include',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-origin',
+            'DNT': '1',
+            'User-Agent': navigator.userAgent,
+            'Accept': 'application/json, text/plain, */*',
+            'Accept-Language': 'pl,en;q=0.5'
+        }
+    });
 }
 
 function connectRibbonButtons() {
@@ -231,7 +261,7 @@ function connectRibbonButtons() {
         window.location.href = '/moje_zadania';
     });
 
-    switch(currentPage) {
+    switch (currentPage) {
         case '/uczen/index':
             index.disabled = true;
             break;
@@ -253,5 +283,5 @@ function connectRibbonButtons() {
         default:
             break;
     }
-    
+
 }
