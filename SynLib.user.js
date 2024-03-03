@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   Violentmonkey Scripts
-// @version     0.0.13
+// @version     0.0.14
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -89,10 +89,126 @@ const Strona = {
             connectRibbonButtons();
         });
 
-        saveAfterLoginData();
         
-        // Stwórz nowy element <div>
-        var centre = document.createElement('div');
+        saveAfterLoginData().then(() => {
+                sessionStorage.setItem('SavedLoginData', true);
+
+                // Div z zawartością strony wycentrowany
+                var centre = document.createElement('div');
+                centre.className = 'centre';
+
+                // div z przywitaniem
+                var headline = document.createElement('div');
+                headline.className = 'headline';
+                headline.innerHTML = `Witaj ${JSON.parse(sessionStorage.getItem('Me')).FirstName}!`;
+
+                // Licznik dni do końca roku szkolnego i roku kalendarzowego
+                let now = new Date();
+                let scholstarts = new Date(JSON.parse(sessionStorage.getItem('Classes')).BeginSchoolYear);
+                let scholends = new Date(JSON.parse(sessionStorage.getItem('Classes')).EndSchoolYear);
+                let dayspassed = Math.floor((now - scholstarts) / (1000 * 60 * 60 * 24));
+                let daysleft = Math.floor((scholends - now) / (1000 * 60 * 60 * 24));
+                let daystotal = daysleft + dayspassed;
+                let percent = dayspassed * 100 / daystotal;
+                let progbar = 220 - 2.2 * percent;
+                if (progbar > 220) {
+                    progbar = 220;
+                }
+                let addon = "ni";
+                if (daysleft === 1) {
+                    addon = "zień";
+                }
+                if (daysleft <= 0) {
+                    daysleft = "--";
+                }
+                let a = new Date(new Date().getFullYear(), 0, 1);
+                let b = new Date(new Date().getFullYear(), 11, 31);
+                let day_of_year = Math.floor((now - a) / (1000 * 60 * 60 * 24));
+                let ddaysleft = Math.floor((b - a) / (1000 * 60 * 60 * 24)) - day_of_year;
+                let dpercent = day_of_year * 100 / Math.floor((b - a) / (1000 * 60 * 60 * 24));
+                let dprogbar = 220 - 2.2 * dpercent;
+                if (dprogbar > 220) {
+                    dprogbar = 220;
+                }
+                let daddon = "ni";
+                if (ddaysleft === 1) {
+                    daddon = "zień";
+                }
+
+                // Licznik dni do końca roku szkolnego
+                var koniecRokSzkolny = document.createElement('div');
+                koniecRokSzkolny.className = 'circ';
+                koniecRokSzkolny.style.color = '#F46'
+                koniecRokSzkolny.innerHTML = `
+                <svg class="cprog" viewBox="0 0 110 110">
+                    <defs>
+                        <path id="thePath" d="M40,90 A40,40 0 1,1 70,90" style="fill:none;"></path>
+                    </defs>
+                    <use xlink:href="#thePath" style="stroke: #333;"></use>
+                    <use xlink:href="#thePath"
+                        style="stroke: #F46;stroke-dasharray: 220.6;stroke-dashoffset: ${progbar};animation: school 2s;"></use>
+                    <!-- Change stroke-dashoffset -->
+                </svg>
+                <div class="value">${percent.toFixed(0)}<b>%</b></div>
+                <div class="tooltip">Pozostało ${daysleft} d${addon}</div>
+                <div class="icon iconoir-bookmark-book" style="font-size: x-large;"></div>
+                `;
+
+                // Licznik dni do końca roku kalendarzowego
+                var koniecRokuKal = document.createElement('div');
+                koniecRokuKal.className = 'circ';
+                koniecRokuKal.style.color = '#48F'
+                koniecRokuKal.innerHTML = `
+                <svg class="cprog" viewBox="0 0 110 110">
+                    <defs>
+                        <path id="thePath2" d="M40,90 A40,40 0 1,1 70,90" style="fill:none;"></path>
+                    </defs>
+                    <use xlink:href="#thePath2" style="stroke: #333;"></use>
+                    <use xlink:href="#thePath2"
+                        style="stroke: #48F;stroke-dasharray: 220.6;stroke-dashoffset: ${dprogbar};animation: year 2s;"></use>
+                    <!-- Change stroke-dashoffset -->
+                </svg>
+                <div class="value">${dpercent.toFixed(0)}<b>%</b></div>
+                <div class="tooltip">Pozostało ${ddaysleft} d${daddon}</div>
+                <div class="icon iconoir-calendar" style="font-size: x-large;"></div>
+                `;
+
+                // Dodaj animację do strony
+                var style = document.createElement('style');
+                style.setAttribute('type', 'text/css');
+                style.innerHTML = `
+                @keyframes school {
+                    from {stroke-dashoffset: 220;}
+                    to {stroke-dashoffset: ${progbar};} 
+                }
+                @keyframes year {
+                    from {stroke-dashoffset: 220;}
+                    to {stroke-dashoffset: ${dprogbar};}
+                }
+                `;
+
+                // Szczęśliwy numerek
+                var luckyNumber = document.createElement('div');
+                const luckyNumberValue = JSON.parse(sessionStorage.getItem('LuckyNumber')).LuckyNumber;
+                const userNumber = JSON.parse(sessionStorage.getItem('User')).ClassRegisterNumber;
+                const luckyNumberDate = JSON.parse(sessionStorage.getItem('LuckyNumber')).LuckyNumberDay;
+                if (luckyNumberValue === userNumber) {
+                    luckyNumber.innerHTML = `<div class="icon iconoir-emoji" style="font-size: x-large;"></div><div>Masz dzisiaj szczęśliwy numerek! (${luckyNumberValue}, ${luckyNumberDate})</div>`;
+                    luckyNumber.className = 'lucky yes';
+                } else {
+                    luckyNumber.innerHTML = `<div class="icon iconoir-emoji-really" style="font-size: x-large;"></div><div><b>${luckyNumberValue}</b> to szczęśliwy numerek na dzień ${luckyNumberDate}</div>`;
+                    luckyNumber.className = 'lucky';
+                };
+
+                // Dodaj zawartość do diva
+                centre.appendChild(headline);
+                centre.appendChild(style);
+                centre.appendChild(koniecRokSzkolny);
+                centre.appendChild(koniecRokuKal);
+                centre.appendChild(luckyNumber);
+
+                document.body.appendChild(centre);
+            });
     }
 }
 
@@ -213,25 +329,38 @@ async function getDataFromLibrusAPI(endpoint) {
 
 // Zapisz dane z API Librusa do sessionStorage
 async function saveAfterLoginData() {
+    if (sessionStorage.getItem('SavedLoginData') !== true) {
+        return;
+    }
     try {
         await getDataFromLibrusAPI('Me').then(data => {
             sessionStorage.setItem('Me', JSON.stringify(data['Me']['Account']));
-        });
-        await getDataFromLibrusAPI('UserProfile').then(data => {
-            sessionStorage.setItem('UserProfile', JSON.stringify(data['UserProfile']));
-        });
-        await getDataFromLibrusAPI('Classes').then(data => {
-            sessionStorage.setItem('Classes', JSON.stringify(data['Class']));
         });
     } catch (error) {
         try {
             console.warn(error);
             await refreshToken();
-            await saveAfterLoginData();
+            await getDataFromLibrusAPI('Me').then(data => {
+                sessionStorage.setItem('Me', JSON.stringify(data['Me']['Account']));
+            });
         } catch (error) {
             console.error(error);
+            return;
         }
     }
+    await getDataFromLibrusAPI('UserProfile').then(data => {
+        sessionStorage.setItem('UserProfile', JSON.stringify(data['UserProfile']));
+    });
+    await getDataFromLibrusAPI('Classes').then(data => {
+        sessionStorage.setItem('Classes', JSON.stringify(data['Class']));
+    });
+    await getDataFromLibrusAPI(`Users/${JSON.parse(sessionStorage.getItem('Me')).UserId}`).then(data => {
+        sessionStorage.setItem('User', JSON.stringify(data['User']));
+    });
+    await getDataFromLibrusAPI('LuckyNumbers').then(data => {
+        sessionStorage.setItem('LuckyNumber', JSON.stringify(data['LuckyNumber']));
+    });
+    console.log('Dane zapisane w sessionStorage');
 }
 
 async function refreshToken() {
