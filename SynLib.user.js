@@ -28,6 +28,10 @@
 // @run-at      document-end
 // ==/UserScript==
 
+// Informacje dodatkowe:
+// Wygląd strony stworzony jest na podstawie rozwiązania self-hosted - librusik
+// https://github.com/dani3l0/librusik
+
 // ==========
 // Obiekt Strona (zawiera wszystkie funkcje które są wywoływane na danej stronie)
 // ==========
