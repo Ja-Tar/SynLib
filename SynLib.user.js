@@ -5,6 +5,8 @@
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
+// @require     https://github.com/Ja-Tar/SynLib/raw/main/Strony.js
+//
 // @updateURL   https://github.com/Ja-Tar/SynLib/raw/main/SynLib.user.js
 //
 // @match       https://portal.librus.pl/rodzina/synergia/loguj*
@@ -119,7 +121,10 @@ else {
         if (sessionStorage.getItem('SavedAfterLogin') !== true) {
             saveAfterLoginData();
         }
-        // dodać tutaj modyfikacje treści (usuwanie elementów, dodawanie elementów itp.)
+        
+        // Stwórz nowy element <div>
+        var centre = document.createElement('div');
+
     }
 }
 
