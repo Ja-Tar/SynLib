@@ -29,6 +29,50 @@
 // ==/UserScript==
 
 // ==========
+// Skrypt
+// ==========
+
+// Skip home page
+if (location.hostname === 'portal.librus.pl' && location.pathname != "/rodzina/synergia/loguj") {
+    location.replace("/rodzina/synergia/loguj");
+}
+
+var GMLoadedLevel;
+var TrybJanosc = false;
+
+// Sprawdź czy wszystkie GM są dostępne
+if (GM.getResourceText && GM.addStyle && GM.xmlHttpRequest) {
+    console.log('Wszystkie GM. zostały załadowane');
+    GMLoadedLevel = 2;
+} else if (GM.addStyle && GM.xmlHttpRequest) {
+    console.warn('Brak API -> GM.getResourceText');
+    console.log('Zmiana na GM_xmlHttpRequest')
+    GMLoadedLevel = 1;
+} else if (GM.getResourceText || GM.addStyle) {
+    throw new Error('Brak wymaganych API');
+} else {
+    throw new Error('Brak wymaganych API GM. -> Potrzebne są GM.addStyle i GM.getResourceText');
+}
+
+if (window.top !== window.self) {
+    if (TrybJanosc !== true) {
+        getFile('SynLib_login.css').then(stle => {
+            GM.addStyle(stle);
+        });
+    }
+}
+else {
+    // Strona logowania
+    if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
+        Strona.Login();
+    }
+    // Strona główna
+    if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
+        Strona.Index();
+    }
+}
+
+// ==========
 // Obiekt Strona (zawiera wszystkie funkcje które są wywoływane na danej stronie)
 // ==========
 
@@ -93,50 +137,6 @@ const Strona = {
         
         // Stwórz nowy element <div>
         var centre = document.createElement('div');
-    }
-}
-
-// ==========
-// Skrypt
-// ==========
-
-// Skip home page
-if (location.hostname === 'portal.librus.pl' && location.pathname != "/rodzina/synergia/loguj") {
-    location.replace("/rodzina/synergia/loguj");
-}
-
-var GMLoadedLevel;
-var TrybJanosc = false;
-
-// Sprawdź czy wszystkie GM są dostępne
-if (GM.getResourceText && GM.addStyle && GM.xmlHttpRequest) {
-    console.log('Wszystkie GM. zostały załadowane');
-    GMLoadedLevel = 2;
-} else if (GM.addStyle && GM.xmlHttpRequest) {
-    console.warn('Brak API -> GM.getResourceText');
-    console.log('Zmiana na GM_xmlHttpRequest')
-    GMLoadedLevel = 1;
-} else if (GM.getResourceText || GM.addStyle) {
-    throw new Error('Brak wymaganych API');
-} else {
-    throw new Error('Brak wymaganych API GM. -> Potrzebne są GM.addStyle i GM.getResourceText');
-}
-
-if (window.top !== window.self) {
-    if (TrybJanosc !== true) {
-        getFile('SynLib_login.css').then(stle => {
-            GM.addStyle(stle);
-        });
-    }
-}
-else {
-    // Strona logowania
-    if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
-        Strona.Login();
-    }
-    // Strona główna
-    if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
-        Strona.Index();
     }
 }
 
