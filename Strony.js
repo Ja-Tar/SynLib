@@ -1,4 +1,4 @@
-export class Strona {
+class Strona {
     Login() {
         document.getElementById('caLoginIframe').addEventListener('load', function () {
             // Pobierz zawartość body z pobranego pliku HTML
