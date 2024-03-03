@@ -5,7 +5,7 @@
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
-// @require     https://github.com/Ja-Tar/SynLib/raw/main/Strony.min.js
+// @require     https://github.com/Ja-Tar/SynLib/raw/main/Strona.js
 //
 // @updateURL   https://github.com/Ja-Tar/SynLib/raw/main/SynLib.user.js
 //
@@ -37,6 +37,7 @@ if (location.hostname === 'portal.librus.pl' && location.pathname != "/rodzina/s
 
 var GMLoadedLevel;
 var TrybJanosc = false;
+var Strona = window.Strona;
 
 // Sprawdź czy wszystkie GM są dostępne
 if (GM.getResourceText && GM.addStyle && GM.xmlHttpRequest) {
