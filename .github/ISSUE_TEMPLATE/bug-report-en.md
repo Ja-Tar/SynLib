@@ -1,7 +1,7 @@
 ---
 name: Bug report EN
 about: Create a report to help us improve userscript
-title: "[EN] - <name>"
+title: "[EN/B] - <name>"
 labels: bug
 assignees: ''
 

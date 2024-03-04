@@ -1,7 +1,7 @@
 ---
 name: Bug report PL / Zgłoszenie błędu
 about: Utwórz raport o błędzie, aby pomóc nam usprawnić skrypt
-title: "[PL] - <nazwa>"
+title: "[PL/B] - <nazwa>"
 labels: bug
 assignees: ''
 
