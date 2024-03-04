@@ -12,9 +12,9 @@ Jasny i zwięzły opis błędu.
 
 **Aby odtworzyć**
 Kroki do odtworzenia błędu:
- -  Przejdź do "...
- - Kliknij na '....'
- - Przewiń w dół do '....'
+ - Przejdź do '...'
+ - Kliknij na '...'
+ - Przewiń w dół do '...'
  - Widać błąd
 
 **Oczekiwane zachowanie**
