@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   Violentmonkey Scripts
-// @version     0.0.15
+// @version     0.0.16
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -241,6 +241,12 @@ if (GM.getResourceText && GM.addStyle && GM.xmlHttpRequest) {
 } else {
     throw new Error('Brak wymaganych API GM. -> Potrzebne są GM.addStyle i GM.getResourceText');
 }
+
+const head = document.getElementsByTagName('head')[0];
+var meta_size = document.createElement('meta');
+meta_size.name = 'viewport';
+meta_size.content = 'width=device-width, initial-scale=0.8';
+head.appendChild(meta_size);
 
 if (window.top !== window.self) {
     if (TrybJanosc !== true) {
