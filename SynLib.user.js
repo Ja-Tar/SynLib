@@ -333,7 +333,7 @@ async function getDataFromLibrusAPI(endpoint) {
 
 // Zapisz dane z API Librusa do sessionStorage
 async function saveAfterLoginData() {
-    if (sessionStorage.getItem('SavedLoginData') !== true) {
+    if (sessionStorage.getItem('SavedLoginData') === true) {
         return;
     }
     try {
