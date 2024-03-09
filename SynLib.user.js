@@ -9,14 +9,16 @@
 //
 // @match       https://portal.librus.pl/rodzina/synergia/loguj*
 // @match       https://api.librus.pl/OAuth/Authorization*
-// @match       https://synergia.librus.pl/uczen/index*
 // @match       https://portal.librus.pl/rodzina
+// @match       https://synergia.librus.pl/uczen/index*
+// @match       https://synergia.librus.pl/przegladaj_oceny/uczen*
 //
 // @resource    login.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html
 // @resource    ribbon.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/ribbon.html
 //
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
+// @resource    SynLib_oceny.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_oceny.css
 // @resource    iconoir.css https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
 //
 // @grant       GM.addStyle
@@ -71,24 +73,11 @@ const Strona = {
     },
     Index() {
         removeAllStyles();
+        addBasicStyles();
 
-        getFile('SynLib_main.css').then(
-            stle => GM.addStyle(stle)
-        );
-        getFile('iconoir.css', "https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/").then(
-            stle => GM.addStyle(stle)
-        );
-
-        document.getElementById('cookieBox').remove();
-        document.getElementById('footer').remove();
+        removeStandardElements();
         document.getElementById('body').innerHTML = '';
-        document.getElementById('main-navigation-container').remove();
-        document.getElementById('user-section').remove();
-        getFile('ribbon.html').then(html => {
-            document.getElementById('top-banner-container').innerHTML = html;
-            connectRibbonButtons();
-        });
-
+        addRibbon();
 
         saveAfterLoginData().then(() => {
             sessionStorage.setItem('SavedLoginData', true);
@@ -209,6 +198,18 @@ const Strona = {
 
             document.body.appendChild(centre);
         });
+    },
+    Oceny() {
+        removeAllStyles();
+        addBasicStyles();
+        getFile('SynLib_oceny.css').then(
+            stle => GM.addStyle(stle)
+        );
+        removeStandardElements();
+        document.querySelectorAll('.fold').forEach(fold => fold.remove());
+        addRibbon();
+
+        // TODO
     }
 }
 
@@ -259,6 +260,10 @@ else {
     // Strona główna
     if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
         Strona.Index();
+    }
+    // Strona ocen
+    if (window.location.href === 'https://synergia.librus.pl/przegladaj_oceny/uczen') {
+        Strona.Oceny();
     }
 }
 
@@ -468,4 +473,30 @@ function connectRibbonButtons() {
             break;
     }
 
+}
+
+// Dodanie wstążki
+function addRibbon() {
+    getFile('ribbon.html').then(html => {
+        document.getElementById('top-banner-container').innerHTML = html;
+        connectRibbonButtons();
+    });
+}
+
+// Dodanie podstawowych styli
+function addBasicStyles() {
+    getFile('SynLib_main.css').then(
+        stle => GM.addStyle(stle)
+    );
+    getFile('iconoir.css', "https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/").then(
+        stle => GM.addStyle(stle)
+    );
+}
+
+// Usuwanie nie potrzebnych elementów
+function removeStandardElements() {
+    document.getElementById('cookieBox').remove();
+    document.getElementById('footer').remove();
+    document.getElementById('main-navigation-container').remove();
+    document.getElementById('user-section').remove();
 }
