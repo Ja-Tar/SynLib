@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   Violentmonkey Scripts
-// @version     0.0.16
+// @version     0.0.17
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
