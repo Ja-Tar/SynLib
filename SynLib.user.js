@@ -25,6 +25,7 @@
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
 // @resource    SynLib_oceny.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_oceny.css
+// @resource    SynLib_kalendarz.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_kalendarz.css
 // @resource    iconoir.css https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
 //
 // @grant       GM.addStyle
@@ -231,12 +232,33 @@ const Strona = {
         addBasicStyles();
         removeStandardElements();
         addRibbon();
-        var oldContainer =  document.querySelector('div.container')
+        getFile('SynLib_kalendarz.css').then(
+            stle => GM.addStyle(stle)
+        );
+        var oldContainer = document.querySelector('div.container')
         var oldContainerText = oldContainer.innerHTML;
         oldContainer.innerHTML = '';
         var newContainer = document.createElement('div');
         newContainer.className = 'timetable';
-        
+        newContainer.innerHTML =
+        `<div class="week-names">
+          <div>Poniedziałek</div>
+          <div>Wtorek</div>
+          <div>Środa</div>
+          <div>Czwartek</div>
+          <div>Piątek</div>
+          <div class="weekend">Sobota</div>
+          <div class="weekend">Niedziela</div>
+        </div>
+        <div class="time-interval">
+          <div>8:00 - 10:00</div>
+          <div>10:00 - 12:00</div>
+          <div>12:00 - 14:00</div>
+          <div>14:00 - 16:00</div>
+          <div>16:00 - 18:00</div>
+          <div>18:00 - 20:00</div>
+        </div>`
+        oldContainer.appendChild(newContainer);
     },
     Zadania() {
         return; // TODO Wygląd zadań
