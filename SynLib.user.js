@@ -7,11 +7,17 @@
 //
 // @updateURL   https://github.com/Ja-Tar/SynLib/raw/main/SynLib.user.js
 //
+// @match       https://portal.librus.pl/rodzina
+// @match       https://portal.librus.pl/
 // @match       https://portal.librus.pl/rodzina/synergia/loguj*
 // @match       https://api.librus.pl/OAuth/Authorization*
-// @match       https://portal.librus.pl/rodzina
 // @match       https://synergia.librus.pl/uczen/index*
 // @match       https://synergia.librus.pl/przegladaj_oceny/uczen*
+// @match       https://synergia.librus.pl/przegladaj_nb/uczen*
+// @match       https://synergia.librus.pl/wiadomosci*
+// @match       https://synergia.librus.pl/ogloszenia*
+// @match       https://synergia.librus.pl/moje_zadania*
+// @match       https://synergia.librus.pl/terminarz*
 //
 // @resource    login.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html
 // @resource    ribbon.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/ribbon.html
@@ -200,6 +206,7 @@ const Strona = {
         });
     },
     Oceny() {
+        return; // TODO Wygląd ocen
         removeAllStyles();
         addBasicStyles();
         getFile('SynLib_oceny.css').then(
@@ -209,7 +216,30 @@ const Strona = {
         document.querySelectorAll('.fold').forEach(fold => fold.remove());
         addRibbon();
 
-        // TODO
+    },
+    Frekwencja() {
+        return; // TODO Wygląd frekwencji
+    },
+    Wiadomosci() {
+        return; // TODO Wygląd wiadomości
+    },
+    Ogloszenia() {
+        return; // TODO Wygląd ogłoszeń
+    },
+    Kalendarz() { // Kalendarz to połaczenie wydarzeń, planu lekcji oraz opcjonalnie zadań domowych
+        removeAllStyles();
+        addBasicStyles();
+        removeStandardElements();
+        addRibbon();
+        var oldContainer =  document.querySelector('div.container')
+        var oldContainerText = oldContainer.innerHTML;
+        oldContainer.innerHTML = '';
+        var newContainer = document.createElement('div');
+        newContainer.className = 'timetable';
+        
+    },
+    Zadania() {
+        return; // TODO Wygląd zadań
     }
 }
 
@@ -253,17 +283,48 @@ if (window.top !== window.self) {
     }
 }
 else {
+    // Zmiana linku do planu lekcji na terminarz
+    document.querySelector('a[href*="/przegladaj_plan_lekcji"]').href = '/terminarz';
+
     // Strona logowania
     if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
+        console.debug('Strona logowania');
         Strona.Login();
     }
     // Strona główna
-    if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
+    else if (window.location.href === 'https://synergia.librus.pl/uczen/index') {
+        console.debug('Strona główna');
         Strona.Index();
     }
     // Strona ocen
-    if (window.location.href === 'https://synergia.librus.pl/przegladaj_oceny/uczen') {
+    else if (window.location.href === 'https://synergia.librus.pl/przegladaj_oceny/uczen') {
+        console.debug('Strona ocen');
         Strona.Oceny();
+    }
+    // Strona frekwencji
+    else if (window.location.href === 'https://synergia.librus.pl/przegladaj_nb/uczen') {
+        console.debug('Strona frekwencji');
+        Strona.Frekwencja();
+    }
+    // Strona wiadomości
+    else if (window.location.href === 'https://synergia.librus.pl/wiadomosci') {
+        console.debug('Strona wiadomości');
+        Strona.Wiadomosci();
+    }
+    // Strona ogłoszeń
+    else if (window.location.href === 'https://synergia.librus.pl/ogloszenia') {
+        console.debug('Strona ogłoszeń');
+        Strona.Ogloszenia();
+    }
+    // Strona zadania domowe
+    else if (window.location.href === 'https://synergia.librus.pl/moje_zadania') {
+        console.debug('Strona zadań domowych');
+        Strona.Zadania();
+    }
+    // Strona kalendarza
+    else if (window.location.href === 'https://synergia.librus.pl/terminarz') {
+        console.debug('Strona kalendarza');
+        Strona.Kalendarz();
     }
 }
 
