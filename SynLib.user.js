@@ -259,6 +259,9 @@ const Strona = {
           <div>18:00 - 20:00</div>
         </div>`
         oldContainer.appendChild(newContainer);
+        var content = document.createElement('div');
+        content.className = 'content';
+        newContainer.appendChild(content);
     },
     Zadania() {
         return; // TODO Wygląd zadań
@@ -306,7 +309,10 @@ if (window.top !== window.self) {
 }
 else {
     // Zmiana linku do planu lekcji na terminarz
-    document.querySelector('a[href*="/przegladaj_plan_lekcji"]').href = '/terminarz';
+    const planLekcji = document.querySelector('a[href*="/przegladaj_plan_lekcji"]');
+    if (planLekcji) {
+        planLekcji.href = '/terminarz';
+    }
 
     // Strona logowania
     if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
