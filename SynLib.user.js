@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        SynLib
-// @namespace   DEBUG
+// @namespace   DEBUG-SynLib
 // @version     0.0.18
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
@@ -46,7 +46,7 @@
 
 let TrybDebug;
 
-if (GM.info.script.namespace === "DEBUG") {
+if (GM.info.script.namespace === "DEBUG-SynLib") {
     console.warn("Uwaga! Skrypt jest w trybie DEBUG. Może zawierać błędy i nie działać poprawnie.")
     let TrybDebug = true; 
 }
@@ -364,7 +364,7 @@ async function GetXMLHttpRequest(url) {
 // Pobierz zawartość pliku za pomocą GM.getResourceText lub GM.xmlHttpRequest
 async function getFile(filename, customUrl = null) {
 
-    if (GM.info.script.namespace === "DEBUG") {
+    if (GM.info.script.namespace === "DEBUG-SynLib") {
         console.log("Pobieranie pliku: " + filename)
         url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/dev/" + filename;
         GMLoadedLevel = 1;
