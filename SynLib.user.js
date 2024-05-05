@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
-// @namespace   Violentmonkey Scripts
-// @version     0.0.18
+// @namespace   RELEASE-SynLib
+// @version     0.0.19
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -208,15 +208,6 @@ const Strona = {
     },
     Oceny() {
         return; // TODO Wygląd ocen
-        removeAllStyles();
-        addBasicStyles();
-        getFile('SynLib_oceny.css').then(
-            stle => GM.addStyle(stle)
-        );
-        removeStandardElements();
-        document.querySelectorAll('.fold').forEach(fold => fold.remove());
-        addRibbon();
-
     },
     Frekwencja() {
         return; // TODO Wygląd frekwencji
@@ -228,40 +219,7 @@ const Strona = {
         return; // TODO Wygląd ogłoszeń
     },
     Kalendarz() { // Kalendarz to połaczenie wydarzeń, planu lekcji oraz opcjonalnie zadań domowych
-        removeAllStyles();
-        addBasicStyles();
-        removeStandardElements();
-        addRibbon();
-        getFile('SynLib_kalendarz.css').then(
-            stle => GM.addStyle(stle)
-        );
-        var oldContainer = document.querySelector('div.container')
-        var oldContainerText = oldContainer.innerHTML;
-        oldContainer.innerHTML = '';
-        var newContainer = document.createElement('div');
-        newContainer.className = 'timetable';
-        newContainer.innerHTML =
-        `<div class="week-names">
-          <div>Poniedziałek</div>
-          <div>Wtorek</div>
-          <div>Środa</div>
-          <div>Czwartek</div>
-          <div>Piątek</div>
-          <div class="weekend">Sobota</div>
-          <div class="weekend">Niedziela</div>
-        </div>
-        <div class="time-interval">
-          <div>8:00 - 10:00</div>
-          <div>10:00 - 12:00</div>
-          <div>12:00 - 14:00</div>
-          <div>14:00 - 16:00</div>
-          <div>16:00 - 18:00</div>
-          <div>18:00 - 20:00</div>
-        </div>`
-        oldContainer.appendChild(newContainer);
-        var content = document.createElement('div');
-        content.className = 'content';
-        newContainer.appendChild(content);
+        return; // TODO Wygląd kalendarza
     },
     Zadania() {
         return; // TODO Wygląd zadań
