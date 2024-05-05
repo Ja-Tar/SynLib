@@ -476,6 +476,7 @@ function connectRibbonButtons() {
     const frekwencja = document.getElementById('frekwencja')
     const wiadomosci = document.getElementById('wiadomosci')
     const ogloszenia = document.getElementById('ogloszenia')
+    const terminarz = document.getElementById('terminarz')
     const zadania = document.getElementById('zadania')
 
     index.addEventListener('click', function () {
@@ -492,6 +493,9 @@ function connectRibbonButtons() {
     });
     ogloszenia.addEventListener('click', function () {
         window.location.href = '/ogloszenia';
+    });
+    terminarz.addEventListener('click', function () {
+        window.location.href = '/terminarz';
     });
     zadania.addEventListener('click', function () {
         window.location.href = '/moje_zadania';
