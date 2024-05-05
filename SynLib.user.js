@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   DEBUG-SynLib
-// @version     0.0.18
+// @version     0.0.19
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -512,6 +512,7 @@ function connectRibbonButtons() {
     const frekwencja = document.getElementById('frekwencja')
     const wiadomosci = document.getElementById('wiadomosci')
     const ogloszenia = document.getElementById('ogloszenia')
+    const plan_lekcji = document.getElementById('plan-lekcji')
     const zadania = document.getElementById('zadania')
 
     index.addEventListener('click', function () {
@@ -528,6 +529,9 @@ function connectRibbonButtons() {
     });
     ogloszenia.addEventListener('click', function () {
         window.location.href = '/ogloszenia';
+    });
+    plan_lekcji.addEventListener('click', function () {
+        window.location.href = '/przegladaj_plan_lekcji';
     });
     zadania.addEventListener('click', function () {
         window.location.href = '/moje_zadania';
@@ -548,6 +552,9 @@ function connectRibbonButtons() {
             break;
         case '/ogloszenia':
             ogloszenia.disabled = true;
+            break;
+        case '/przegladaj_plan_lekcji':
+            plan_lekcji.disabled = true;
             break;
         case '/moje_zadania':
             zadania.disabled = true;
