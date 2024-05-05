@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        SynLib
-// @namespace   Violentmonkey Scripts
+// @namespace   DEBUG
 // @version     0.0.18
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
@@ -40,6 +40,15 @@
 // Informacje dodatkowe:
 // Wygląd strony stworzony jest na podstawie rozwiązania self-hosted - librusik
 // https://github.com/dani3l0/librusik
+
+// 
+
+let TrybDebug;
+
+if GM.info.script.namespace == "DEBUG" {
+    console.warn("Uwaga! Skrypt jest w trybie DEBUG. Może zawierać błędy i nie działać poprawnie.")
+    let TrybDebug = true; 
+}
 
 // ==========
 // Obiekt Strona (zawiera wszystkie funkcje które są wywoływane na danej stronie)
@@ -247,8 +256,6 @@ const Strona = {
           <div>Środa</div>
           <div>Czwartek</div>
           <div>Piątek</div>
-          <div class="weekend">Sobota</div>
-          <div class="weekend">Niedziela</div>
         </div>
         <div class="time-interval">
           <div>8:00 - 10:00</div>
@@ -378,10 +385,18 @@ async function GetXMLHttpRequest(url) {
 
 // Pobierz zawartość pliku za pomocą GM.getResourceText lub GM.xmlHttpRequest
 async function getFile(filename, customUrl = null) {
+
+    if (TrybDebug === true) {
+        console.log("Pobieranie pliku: " + filename)
+        url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/dev/" + filename;
+    } else {
+        url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/main/" + filename;
+    }
+
     if (customUrl === null) {
         if (GMLoadedLevel === 1) {
             try {
-                const responseData = await GetXMLHttpRequest("https://raw.githubusercontent.com/Ja-Tar/SynLib/main/" + filename);
+                const responseData = await GetXMLHttpRequest(url);
                 return responseData;
             } catch (error) {
                 console.error(error);
