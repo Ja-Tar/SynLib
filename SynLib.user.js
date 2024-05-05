@@ -18,6 +18,7 @@
 // @match       https://synergia.librus.pl/ogloszenia*
 // @match       https://synergia.librus.pl/moje_zadania*
 // @match       https://synergia.librus.pl/terminarz*
+// @match       https://synergia.librus.pl/przegladaj_plan_lekcji*
 //
 // @resource    login.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html
 // @resource    ribbon.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/ribbon.html
@@ -236,49 +237,17 @@ const Strona = {
     Ogloszenia() {
         return; // TODO Wygląd ogłoszeń
     },
-    Kalendarz() { // Kalendarz to połaczenie wydarzeń, planu lekcji oraz opcjonalnie zadań domowych
+    PlanLekcji() { // Plan lekcji to połaczenie wydarzeń, planu lekcji oraz opcjonalnie zadań domowych
         removeAllStyles();
         addBasicStyles();
-        removeStandardElements();
         addRibbon();
+        // replace the body div with container-background div
+        var body = document.getElementById('body');
+        var container = document.getElementsByClassName('container-background')[0];
+        body.innerHTML = container.innerHTML;
         getFile('SynLib_kalendarz.css').then(
             stle => GM.addStyle(stle)
         );
-        var oldContainer = document.querySelector('div.container')
-        var oldContainerText = oldContainer.innerHTML;
-        oldContainer.innerHTML = '';
-        var newContainer = document.createElement('div');
-        newContainer.className = 'timetable';
-        newContainer.innerHTML =
-        `<div class="week-names">
-          <div>Poniedziałek</div>
-          <div>Wtorek</div>
-          <div>Środa</div>
-          <div>Czwartek</div>
-          <div>Piątek</div>
-        </div>
-        <div class="time-interval">
-          <div>8:00 - 10:00</div>
-          <div>10:00 - 12:00</div>
-          <div>12:00 - 14:00</div>
-          <div>14:00 - 16:00</div>
-          <div>16:00 - 18:00</div>
-          <div>18:00 - 20:00</div>
-        </div>`
-        oldContainer.appendChild(newContainer);
-        var content = document.createElement('div');
-        content.className = 'content';
-        newContainer.appendChild(content);
-        for (let i = 0; i < 5; i++) {
-            var day = document.createElement('div');
-            day.className = 'day';
-            content.appendChild(day);
-            for (let j = 0; j < 6; j++) {
-                var lesson = document.createElement('div');
-                lesson.className = 'lesson';
-                day.appendChild(lesson);
-            }
-        }
     },
     Zadania() {
         return; // TODO Wygląd zadań
@@ -325,12 +294,6 @@ if (window.top !== window.self) {
     }
 }
 else {
-    // Zmiana linku do planu lekcji na terminarz
-    const planLekcji = document.querySelector('a[href*="/przegladaj_plan_lekcji"]');
-    if (planLekcji) {
-        planLekcji.href = '/terminarz';
-    }
-
     // Strona logowania
     if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
         console.debug('Strona logowania');
@@ -368,8 +331,13 @@ else {
     }
     // Strona kalendarza
     else if (window.location.href === 'https://synergia.librus.pl/terminarz') {
-        console.debug('Strona kalendarza');
-        Strona.Kalendarz();
+        console.debug('Strona kalendarza - przenosimy do planu lekcji');
+        window.location.href = '/przegladaj_plan_lekcji';
+    } 
+    // Strona planu lekcji
+    else if (window.location.href === 'https://synergia.librus.pl/przegladaj_plan_lekcji') {
+        console.debug('Strona planu lekcji');
+        Strona.PlanLekcji();
     }
 }
 
@@ -593,7 +561,16 @@ function connectRibbonButtons() {
 // Dodanie wstążki
 function addRibbon() {
     getFile('ribbon.html').then(html => {
-        document.getElementById('top-banner-container').innerHTML = html;
+        try {
+            document.getElementById('top-banner-container').innerHTML = html;
+        } catch (e) {
+            if (e instanceof TypeError) {
+                console.warn('Nie znaleziono elementu top-banner-container. Dodawanie wstążki do diva page.');
+                document.getElementById('page').insertAdjacentHTML('beforebegin', html);
+            } else {
+                console.error(e);
+            }
+        }
         connectRibbonButtons();
     });
 }
