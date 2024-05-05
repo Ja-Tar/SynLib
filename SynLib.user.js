@@ -45,7 +45,7 @@
 
 let TrybDebug;
 
-if GM.info.script.namespace == "DEBUG" {
+if (GM.info.script.namespace === "DEBUG") {
     console.warn("Uwaga! Skrypt jest w trybie DEBUG. Może zawierać błędy i nie działać poprawnie.")
     let TrybDebug = true; 
 }
@@ -269,6 +269,16 @@ const Strona = {
         var content = document.createElement('div');
         content.className = 'content';
         newContainer.appendChild(content);
+        for (let i = 0; i < 5; i++) {
+            var day = document.createElement('div');
+            day.className = 'day';
+            content.appendChild(day);
+            for (let j = 0; j < 6; j++) {
+                var lesson = document.createElement('div');
+                lesson.className = 'lesson';
+                day.appendChild(lesson);
+            }
+        }
     },
     Zadania() {
         return; // TODO Wygląd zadań
@@ -386,9 +396,10 @@ async function GetXMLHttpRequest(url) {
 // Pobierz zawartość pliku za pomocą GM.getResourceText lub GM.xmlHttpRequest
 async function getFile(filename, customUrl = null) {
 
-    if (TrybDebug === true) {
+    if (GM.info.script.namespace === "DEBUG") {
         console.log("Pobieranie pliku: " + filename)
         url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/dev/" + filename;
+        GMLoadedLevel = 1;
     } else {
         url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/main/" + filename;
     }
