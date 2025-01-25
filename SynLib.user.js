@@ -240,6 +240,9 @@ const Strona = {
             stle => GM.addStyle(stle)
         );
     },
+    Kalendarz() { // Kalendarz to połaczenie wydarzeń, planu lekcji oraz opcjonalnie zadań domowych
+        return; // TODO Wygląd kalendarza
+    },
     Zadania() {
         return; // TODO Wygląd zadań
     }
