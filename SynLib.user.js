@@ -108,8 +108,6 @@ const Strona = {
         addRibbon();
 
         saveAfterLoginData().then(() => {
-            sessionStorage.setItem('SavedLoginData', true);
-
             // Div z zawartością strony wycentrowany
             var centre = document.createElement('div');
             centre.className = 'centre';
@@ -447,9 +445,6 @@ async function getDataFromLibrusAPI(endpoint) {
 
 // Zapisz dane z API Librusa do sessionStorage
 async function saveAfterLoginData() {
-    if (sessionStorage.getItem('SavedLoginData') === true) {
-        return;
-    }
     try {
         await getDataFromLibrusAPI('Me').then(data => {
             sessionStorage.setItem('Me', JSON.stringify(data['Me']['Account']));
@@ -466,6 +461,13 @@ async function saveAfterLoginData() {
             return;
         }
     }
+    if (sessionStorage.getItem('SavedLoginData') !== null && JSON.parse(sessionStorage.getItem('Me')).UserId === JSON.parse(sessionStorage.getItem('Me')).UserId) {
+        const time = Date.now() - sessionStorage.getItem('SavedLoginData');
+        if (time < 300000) { // 5 minut
+            console.log('Dane są aktualne');
+            return;
+        }
+    }
     await getDataFromLibrusAPI('UserProfile').then(data => {
         sessionStorage.setItem('UserProfile', JSON.stringify(data['UserProfile']));
     });
@@ -479,6 +481,7 @@ async function saveAfterLoginData() {
         sessionStorage.setItem('LuckyNumber', JSON.stringify(data['LuckyNumber']));
     });
     console.log('Dane zapisane w sessionStorage');
+    sessionStorage.setItem('SavedLoginData', Date.now());
 }
 
 // Odśwież token
