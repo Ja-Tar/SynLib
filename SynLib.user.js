@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name        SynLib
+// REMOVE DEBUG WHEN RELEASE
 // @namespace   DEBUG-SynLib
-// @version     0.0.19
+// @version     0.0.20
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -26,8 +27,18 @@
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
 // @resource    SynLib_oceny.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_oceny.css
-// @resource    SynLib_kalendarz.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_kalendarz.css
+// @resource    SynLib_plan_lekcji.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_plan_lekcji.css
 // @resource    iconoir.css https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
+//
+// REMOVE WHEN RELEASE ========================================
+// @resource    login.html http://127.0.0.1:5500/login.html
+// @resource    ribbon.html http://127.0.0.1:5500/ribbon.html
+//
+// @resource    SynLib_login.css http://127.0.0.1:5500/SynLib_login.css
+// @resource    SynLib_main.css http://127.0.0.1:5500/SynLib_main.css
+// @resource    SynLib_oceny.css http://127.0.0.1:5500/SynLib_oceny.css
+// @resource    SynLib_plan_lekcji.css http://127.0.0.1:5500/SynLib_plan_lekcji.css
+// ============================================================
 //
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
@@ -236,12 +247,9 @@ const Strona = {
         var body = document.getElementById('body');
         var container = document.getElementsByClassName('container-background')[0];
         body.innerHTML = container.innerHTML;
-        getFile('SynLib_kalendarz.css').then(
+        getFile('SynLib_plan_lekcji.css').then(
             stle => GM.addStyle(stle)
         );
-    },
-    Kalendarz() { // Kalendarz to połaczenie wydarzeń, planu lekcji oraz opcjonalnie zadań domowych
-        return; // TODO Wygląd kalendarza
     },
     Zadania() {
         return; // TODO Wygląd zadań
@@ -506,6 +514,7 @@ function connectRibbonButtons() {
     const frekwencja = document.getElementById('frekwencja')
     const wiadomosci = document.getElementById('wiadomosci')
     const ogloszenia = document.getElementById('ogloszenia')
+    const plan_lekcji = document.getElementById('plan_lekcji')
     const zadania = document.getElementById('zadania')
 
     index.addEventListener('click', function () {
@@ -522,6 +531,9 @@ function connectRibbonButtons() {
     });
     ogloszenia.addEventListener('click', function () {
         window.location.href = '/ogloszenia';
+    });
+    plan_lekcji.addEventListener('click', function () {
+        window.location.href = '/przegladaj_plan_lekcji';
     });
     zadania.addEventListener('click', function () {
         window.location.href = '/moje_zadania';
