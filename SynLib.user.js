@@ -218,15 +218,6 @@ const Strona = {
     },
     Oceny() {
         return; // TODO Wygląd ocen
-        removeAllStyles();
-        addBasicStyles();
-        getFile('SynLib_oceny.css').then(
-            stle => GM.addStyle(stle)
-        );
-        removeStandardElements();
-        document.querySelectorAll('.fold').forEach(fold => fold.remove());
-        addRibbon();
-
     },
     Frekwencja() {
         return; // TODO Wygląd frekwencji
@@ -512,7 +503,6 @@ function connectRibbonButtons() {
     const frekwencja = document.getElementById('frekwencja')
     const wiadomosci = document.getElementById('wiadomosci')
     const ogloszenia = document.getElementById('ogloszenia')
-    const plan_lekcji = document.getElementById('plan-lekcji')
     const zadania = document.getElementById('zadania')
 
     index.addEventListener('click', function () {
@@ -529,9 +519,6 @@ function connectRibbonButtons() {
     });
     ogloszenia.addEventListener('click', function () {
         window.location.href = '/ogloszenia';
-    });
-    plan_lekcji.addEventListener('click', function () {
-        window.location.href = '/przegladaj_plan_lekcji';
     });
     zadania.addEventListener('click', function () {
         window.location.href = '/moje_zadania';
