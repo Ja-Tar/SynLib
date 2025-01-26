@@ -333,6 +333,14 @@ else {
     }
     // Strona kalendarza
     else if (window.location.href === 'https://synergia.librus.pl/terminarz') {
+        document.body.innerHTML = '<h1>Przenoszenie do planu lekcji...</h1>';
+        document.body.style.textAlign = 'center';
+        document.body.style.marginTop = '50vh';
+        document.body.style.transform = 'translateY(-50%)';
+        document.body.style.fontFamily = 'Arial, sans-serif';
+        document.body.style.fontSize = '2rem';
+        document.body.style.backgroundColor = '#1e1e1e';
+        document.body.style.color = '#fff';
         console.debug('Strona kalendarza - przenosimy do planu lekcji');
         window.location.href = '/przegladaj_plan_lekcji';
     }
@@ -658,13 +666,19 @@ function applyColors() {
 // Skalowanie tabeli w zależności od szerokości urządzenia
 const table = document.querySelector('.plan-lekcji');
 const resizeTable = () => {
-    if (window.innerWidth < 2100) {
-        table.style.transform = `scale(${window.innerWidth / 2100})`;
+    if (window.innerWidth < 1000) {
+        table.style.overflowX = 'scroll';
+        table.style.transform = 'scale(1)';
+        table.style.marginLeft = 'auto';
+        document.body.style.overflowX = 'hidden';
+    } else if (window.innerWidth < 1900) {
+        table.style.overflow = 'hidden';
+        table.style.transform = `scale(${window.innerWidth / 1900})`;
         table.style.transformOrigin = '0 0';
-    } else if (window.innerWidth < 800) {
-        console.log("ADD MOBILE ONE DAY VERSION");
+        table.style.marginLeft = '5px';
     } else {
         table.style.transform = 'scale(1)';
+        table.style.marginLeft = 'auto';
     }
 };
 
