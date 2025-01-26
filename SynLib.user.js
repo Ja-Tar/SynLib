@@ -30,16 +30,6 @@
 // @resource    SynLib_plan_lekcji.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_plan_lekcji.css
 // @resource    iconoir.css https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
 //
-// REMOVE WHEN RELEASE ========================================
-// @resource    login.html http://127.0.0.1:5500/login.html
-// @resource    ribbon.html http://127.0.0.1:5500/ribbon.html
-//
-// @resource    SynLib_login.css http://127.0.0.1:5500/SynLib_login.css
-// @resource    SynLib_main.css http://127.0.0.1:5500/SynLib_main.css
-// @resource    SynLib_oceny.css http://127.0.0.1:5500/SynLib_oceny.css
-// @resource    SynLib_plan_lekcji.css http://127.0.0.1:5500/SynLib_plan_lekcji.css
-// ============================================================
-//
 // @grant       GM.addStyle
 // @grant       GM.getResourceText
 // @grant       GM.xmlHttpRequest
