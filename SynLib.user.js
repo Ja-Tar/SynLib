@@ -1,7 +1,6 @@
 // ==UserScript==
 // @name        SynLib
-// REMOVE DEBUG WHEN RELEASE
-// @namespace   DEBUG-SynLib
+// @namespace   RELEASE-SynLib
 // @version     0.0.20
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
@@ -260,8 +259,7 @@ var TrybJanosc = false;
 // Sprawdź czy wszystkie GM są dostępne
 if (GM.getResourceText && GM.addStyle && GM.xmlHttpRequest) {
     console.log('Wszystkie GM. zostały załadowane');
-    //GMLoadedLevel = 2;
-    GMLoadedLevel = 1; // REMOVE
+    GMLoadedLevel = 2;
 } else if (GM.addStyle && GM.xmlHttpRequest) {
     console.warn('Brak API -> GM.getResourceText');
     console.log('Zmiana na GM_xmlHttpRequest')
@@ -366,10 +364,8 @@ async function getFile(filename, customUrl = null) {
 
     if (GM.info.script.namespace === "DEBUG-SynLib") {
         console.log("Pobieranie pliku: " + filename)
-        //url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/dev/" + filename;
-        // REMOVE
         url = "http://127.0.0.1:5500/" + filename;
-        GMLoadedLevel = 1;
+        GMLoadedLevel = 1; // HACK
     } else {
         url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/main/" + filename;
     }
