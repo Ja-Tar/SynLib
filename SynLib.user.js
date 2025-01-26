@@ -59,7 +59,7 @@ let TrybDebug;
 
 if (GM.info.script.namespace === "DEBUG-SynLib") {
     console.warn("Uwaga! Skrypt jest w trybie DEBUG. Może zawierać błędy i nie działać poprawnie.")
-    let TrybDebug = true; 
+    let TrybDebug = true;
 }
 
 // ==========
@@ -248,6 +248,7 @@ const Strona = {
         getFile('SynLib_plan_lekcji.css').then(
             stle => GM.addStyle(stle)
         );
+        applyColors();
     },
     Zadania() {
         return; // TODO Wygląd zadań
@@ -269,7 +270,8 @@ var TrybJanosc = false;
 // Sprawdź czy wszystkie GM są dostępne
 if (GM.getResourceText && GM.addStyle && GM.xmlHttpRequest) {
     console.log('Wszystkie GM. zostały załadowane');
-    GMLoadedLevel = 2;
+    //GMLoadedLevel = 2;
+    GMLoadedLevel = 1; // REMOVE
 } else if (GM.addStyle && GM.xmlHttpRequest) {
     console.warn('Brak API -> GM.getResourceText');
     console.log('Zmiana na GM_xmlHttpRequest')
@@ -333,7 +335,7 @@ else {
     else if (window.location.href === 'https://synergia.librus.pl/terminarz') {
         console.debug('Strona kalendarza - przenosimy do planu lekcji');
         window.location.href = '/przegladaj_plan_lekcji';
-    } 
+    }
     // Strona planu lekcji
     else if (window.location.href === 'https://synergia.librus.pl/przegladaj_plan_lekcji') {
         console.debug('Strona planu lekcji');
@@ -366,7 +368,9 @@ async function getFile(filename, customUrl = null) {
 
     if (GM.info.script.namespace === "DEBUG-SynLib") {
         console.log("Pobieranie pliku: " + filename)
-        url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/dev/" + filename;
+        //url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/dev/" + filename;
+        // REMOVE
+        url = "http://127.0.0.1:5500/" + filename;
         GMLoadedLevel = 1;
     } else {
         url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/main/" + filename;
@@ -604,3 +608,65 @@ function removeStandardElements() {
     document.getElementById('main-navigation-container').remove();
     document.getElementById('user-section').remove();
 }
+
+function applyColors() {
+    const timetableEntries = document.querySelectorAll('#timetableEntryBox .text');
+    const colors = {};
+    const colorPalette = ["#4caf50", "#2196f3", "#ff9800", "#9c27b0", "#f44336", "#00bcd4", "#e91e63", "#673ab7", "#3f51b5", "#ff5722", "#795548", "#607d8b"];
+    let colorIndex = 0; // index of the color in the colorPalette array
+
+    timetableEntries.forEach(entry => {
+        const subject = entry.querySelector('b').innerText;
+        const color = getColorForSubject(subject);
+        const timetableEntryBox = entry.closest('#timetableEntryBox');
+
+        if (timetableEntryBox.children.length === 1) {
+            timetableEntryBox.style.backgroundColor = color;
+        } else {
+            entry.style.backgroundColor = color;
+        }
+
+        const highlightDiv = document.createElement('div');
+        highlightDiv.className = 'highlight';
+        highlightDiv.innerHTML = entry.innerHTML;
+        entry.innerHTML = '';
+        entry.appendChild(highlightDiv);
+
+        // Dodaj klasy CSS dla odwołanych i przesuniętych lekcji
+        if (timetableEntryBox.querySelector('.plan-lekcji-info')) {
+            if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('zastępstwo')) {
+                entry.classList.add('zastepstwo');
+            } else if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('odwołane')) {
+                entry.classList.add('odwolane');
+            } else if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('przesunięcie')) {
+                entry.classList.add('przesuniete');
+            } else if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('miejsce przesunięcia')) {
+                entry.classList.add('miejsce-przesuniecia');
+            }
+        }
+    });
+
+    function getColorForSubject(subject) {
+        if (!colors[subject]) {
+            colors[subject] = colorPalette[colorIndex % colorPalette.length];
+            colorIndex++;
+        }
+        return colors[subject];
+    }
+}
+
+// Skalowanie tabeli w zależności od szerokości urządzenia
+const table = document.querySelector('.plan-lekcji');
+const resizeTable = () => {
+    if (window.innerWidth < 2100) {
+        table.style.transform = `scale(${window.innerWidth / 2100})`;
+        table.style.transformOrigin = '0 0';
+    } else if (window.innerWidth < 800) {
+        console.log("ADD MOBILE ONE DAY VERSION");
+    } else {
+        table.style.transform = 'scale(1)';
+    }
+};
+
+window.addEventListener('resize', resizeTable);
+resizeTable();
