@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        SynLib
 // @namespace   RELEASE-SynLib
-// @version     0.0.19
+// @version     0.0.20
 // @author      JaTar
 // @description Teraz to wygląda! Poprawia wygląd Librusa.
 //
@@ -18,6 +18,7 @@
 // @match       https://synergia.librus.pl/ogloszenia*
 // @match       https://synergia.librus.pl/moje_zadania*
 // @match       https://synergia.librus.pl/terminarz*
+// @match       https://synergia.librus.pl/przegladaj_plan_lekcji*
 //
 // @resource    login.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/login.html
 // @resource    ribbon.html https://raw.githubusercontent.com/Ja-Tar/SynLib/main/ribbon.html
@@ -25,7 +26,7 @@
 // @resource    SynLib_login.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_login.css
 // @resource    SynLib_main.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_main.css
 // @resource    SynLib_oceny.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_oceny.css
-// @resource    SynLib_kalendarz.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_kalendarz.css
+// @resource    SynLib_plan_lekcji.css https://raw.githubusercontent.com/Ja-Tar/SynLib/main/SynLib_plan_lekcji.css
 // @resource    iconoir.css https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css
 //
 // @grant       GM.addStyle
@@ -40,6 +41,15 @@
 // Informacje dodatkowe:
 // Wygląd strony stworzony jest na podstawie rozwiązania self-hosted - librusik
 // https://github.com/dani3l0/librusik
+
+// 
+
+let TrybDebug;
+
+if (GM.info.script.namespace === "DEBUG-SynLib") {
+    console.warn("Uwaga! Skrypt jest w trybie DEBUG. Może zawierać błędy i nie działać poprawnie.")
+    let TrybDebug = true;
+}
 
 // ==========
 // Obiekt Strona (zawiera wszystkie funkcje które są wywoływane na danej stronie)
@@ -87,8 +97,6 @@ const Strona = {
         addRibbon();
 
         saveAfterLoginData().then(() => {
-            sessionStorage.setItem('SavedLoginData', true);
-
             // Div z zawartością strony wycentrowany
             var centre = document.createElement('div');
             centre.className = 'centre';
@@ -218,8 +226,18 @@ const Strona = {
     Ogloszenia() {
         return; // TODO Wygląd ogłoszeń
     },
-    Kalendarz() { // Kalendarz to połaczenie wydarzeń, planu lekcji oraz opcjonalnie zadań domowych
-        return; // TODO Wygląd kalendarza
+    PlanLekcji() { // Plan lekcji to połaczenie wydarzeń, planu lekcji oraz opcjonalnie zadań domowych
+        removeAllStyles();
+        addBasicStyles();
+        addRibbon();
+        // replace the body div with container-background div
+        var body = document.getElementById('body');
+        var container = document.getElementsByClassName('container-background')[0];
+        body.innerHTML = container.innerHTML;
+        getFile('SynLib_plan_lekcji.css').then(
+            stle => GM.addStyle(stle)
+        );
+        applyColors();
     },
     Zadania() {
         return; // TODO Wygląd zadań
@@ -266,12 +284,6 @@ if (window.top !== window.self) {
     }
 }
 else {
-    // Zmiana linku do planu lekcji na terminarz
-    const planLekcji = document.querySelector('a[href*="/przegladaj_plan_lekcji"]');
-    if (planLekcji) {
-        planLekcji.href = '/terminarz';
-    }
-
     // Strona logowania
     if (window.location.href === 'https://portal.librus.pl/rodzina/synergia/loguj') {
         console.debug('Strona logowania');
@@ -309,8 +321,21 @@ else {
     }
     // Strona kalendarza
     else if (window.location.href === 'https://synergia.librus.pl/terminarz') {
-        console.debug('Strona kalendarza');
-        Strona.Kalendarz();
+        document.body.innerHTML = '<h1>Przenoszenie do planu lekcji...</h1>';
+        document.body.style.textAlign = 'center';
+        document.body.style.marginTop = '50vh';
+        document.body.style.transform = 'translateY(-50%)';
+        document.body.style.fontFamily = 'Arial, sans-serif';
+        document.body.style.fontSize = '2rem';
+        document.body.style.backgroundColor = '#1e1e1e';
+        document.body.style.color = '#fff';
+        console.debug('Strona kalendarza - przenosimy do planu lekcji');
+        window.location.href = '/przegladaj_plan_lekcji';
+    }
+    // Strona planu lekcji
+    else if (window.location.href === 'https://synergia.librus.pl/przegladaj_plan_lekcji') {
+        console.debug('Strona planu lekcji');
+        Strona.PlanLekcji();
     }
 }
 
@@ -336,10 +361,19 @@ async function GetXMLHttpRequest(url) {
 
 // Pobierz zawartość pliku za pomocą GM.getResourceText lub GM.xmlHttpRequest
 async function getFile(filename, customUrl = null) {
+
+    if (GM.info.script.namespace === "DEBUG-SynLib") {
+        console.log("Pobieranie pliku: " + filename)
+        url = "http://127.0.0.1:5500/" + filename;
+        GMLoadedLevel = 1; // HACK
+    } else {
+        url = "https://raw.githubusercontent.com/Ja-Tar/SynLib/main/" + filename;
+    }
+
     if (customUrl === null) {
         if (GMLoadedLevel === 1) {
             try {
-                const responseData = await GetXMLHttpRequest("https://raw.githubusercontent.com/Ja-Tar/SynLib/main/" + filename);
+                const responseData = await GetXMLHttpRequest(url);
                 return responseData;
             } catch (error) {
                 console.error(error);
@@ -409,9 +443,6 @@ async function getDataFromLibrusAPI(endpoint) {
 
 // Zapisz dane z API Librusa do sessionStorage
 async function saveAfterLoginData() {
-    if (sessionStorage.getItem('SavedLoginData') === true) {
-        return;
-    }
     try {
         await getDataFromLibrusAPI('Me').then(data => {
             sessionStorage.setItem('Me', JSON.stringify(data['Me']['Account']));
@@ -428,6 +459,13 @@ async function saveAfterLoginData() {
             return;
         }
     }
+    if (sessionStorage.getItem('SavedLoginData') !== null && JSON.parse(sessionStorage.getItem('Me')).UserId === JSON.parse(sessionStorage.getItem('Me')).UserId) {
+        const time = Date.now() - sessionStorage.getItem('SavedLoginData');
+        if (time < 300000) { // 5 minut
+            console.log('Dane są aktualne');
+            return;
+        }
+    }
     await getDataFromLibrusAPI('UserProfile').then(data => {
         sessionStorage.setItem('UserProfile', JSON.stringify(data['UserProfile']));
     });
@@ -441,6 +479,7 @@ async function saveAfterLoginData() {
         sessionStorage.setItem('LuckyNumber', JSON.stringify(data['LuckyNumber']));
     });
     console.log('Dane zapisane w sessionStorage');
+    sessionStorage.setItem('SavedLoginData', Date.now());
 }
 
 // Odśwież token
@@ -476,7 +515,7 @@ function connectRibbonButtons() {
     const frekwencja = document.getElementById('frekwencja')
     const wiadomosci = document.getElementById('wiadomosci')
     const ogloszenia = document.getElementById('ogloszenia')
-    const terminarz = document.getElementById('terminarz')
+    const plan_lekcji = document.getElementById('plan_lekcji')
     const zadania = document.getElementById('zadania')
 
     index.addEventListener('click', function () {
@@ -494,8 +533,8 @@ function connectRibbonButtons() {
     ogloszenia.addEventListener('click', function () {
         window.location.href = '/ogloszenia';
     });
-    terminarz.addEventListener('click', function () {
-        window.location.href = '/terminarz';
+    plan_lekcji.addEventListener('click', function () {
+        window.location.href = '/przegladaj_plan_lekcji';
     });
     zadania.addEventListener('click', function () {
         window.location.href = '/moje_zadania';
@@ -517,6 +556,9 @@ function connectRibbonButtons() {
         case '/ogloszenia':
             ogloszenia.disabled = true;
             break;
+        case '/przegladaj_plan_lekcji':
+            plan_lekcji.disabled = true;
+            break;
         case '/moje_zadania':
             zadania.disabled = true;
             break;
@@ -529,7 +571,16 @@ function connectRibbonButtons() {
 // Dodanie wstążki
 function addRibbon() {
     getFile('ribbon.html').then(html => {
-        document.getElementById('top-banner-container').innerHTML = html;
+        try {
+            document.getElementById('top-banner-container').innerHTML = html;
+        } catch (e) {
+            if (e instanceof TypeError) {
+                console.warn('Nie znaleziono elementu top-banner-container. Dodawanie wstążki do diva page.');
+                document.getElementById('page').insertAdjacentHTML('beforebegin', html);
+            } else {
+                console.error(e);
+            }
+        }
         connectRibbonButtons();
     });
 }
@@ -551,3 +602,71 @@ function removeStandardElements() {
     document.getElementById('main-navigation-container').remove();
     document.getElementById('user-section').remove();
 }
+
+function applyColors() {
+    const timetableEntries = document.querySelectorAll('#timetableEntryBox .text');
+    const colors = {};
+    const colorPalette = ["#4caf50", "#2196f3", "#ff9800", "#9c27b0", "#f44336", "#00bcd4", "#e91e63", "#673ab7", "#3f51b5", "#ff5722", "#795548", "#607d8b"];
+    let colorIndex = 0; // index of the color in the colorPalette array
+
+    timetableEntries.forEach(entry => {
+        const subject = entry.querySelector('b').innerText;
+        const color = getColorForSubject(subject);
+        const timetableEntryBox = entry.closest('#timetableEntryBox');
+
+        if (timetableEntryBox.children.length === 1) {
+            timetableEntryBox.style.backgroundColor = color;
+        } else {
+            entry.style.backgroundColor = color;
+        }
+
+        const highlightDiv = document.createElement('div');
+        highlightDiv.className = 'highlight';
+        highlightDiv.innerHTML = entry.innerHTML;
+        entry.innerHTML = '';
+        entry.appendChild(highlightDiv);
+
+        // Dodaj klasy CSS dla odwołanych i przesuniętych lekcji
+        if (timetableEntryBox.querySelector('.plan-lekcji-info')) {
+            if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('zastępstwo')) {
+                entry.classList.add('zastepstwo');
+            } else if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('odwołane')) {
+                entry.classList.add('odwolane');
+            } else if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('przesunięcie')) {
+                entry.classList.add('przesuniete');
+            } else if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('miejsce przesunięcia')) {
+                entry.classList.add('miejsce-przesuniecia');
+            }
+        }
+    });
+
+    function getColorForSubject(subject) {
+        if (!colors[subject]) {
+            colors[subject] = colorPalette[colorIndex % colorPalette.length];
+            colorIndex++;
+        }
+        return colors[subject];
+    }
+}
+
+// Skalowanie tabeli w zależności od szerokości urządzenia
+const table = document.querySelector('.plan-lekcji');
+const resizeTable = () => {
+    if (window.innerWidth < 1000) {
+        table.style.overflowX = 'scroll';
+        table.style.transform = 'scale(1)';
+        table.style.marginLeft = 'auto';
+        document.body.style.overflowX = 'hidden';
+    } else if (window.innerWidth < 1900) {
+        table.style.overflow = 'hidden';
+        table.style.transform = `scale(${window.innerWidth / 1900})`;
+        table.style.transformOrigin = '0 0';
+        table.style.marginLeft = '5px';
+    } else {
+        table.style.transform = 'scale(1)';
+        table.style.marginLeft = 'auto';
+    }
+};
+
+window.addEventListener('resize', resizeTable);
+resizeTable();
