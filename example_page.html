@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+   <html lang="pl-PL"><head><title>LIBRUS Synergia</title>
+   <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Reply-to" content="administrator@dziennik.librus.pl">
+   <meta http-equiv="Content-Language" content="pl">
+   <meta name="Keywords" content="dziennik, elektroniczny, edukacja, oświata, programy, komputerowe, edziennik, e-dziennik, synergia">
+   <meta name="Description" content="Dziennik elektroniczny">
+   <meta name="robots" content="noindex, nofollow" />
+           <link rel="shortcut icon" href="/images/synergia.ico">
+                   <link rel="stylesheet" href="/js/jquery/themes/base/jquery.ui.all.1285316921.css" type="text/css"><link rel="stylesheet" href="/js/jquery/jquery-ui-1.9.2.custom/css/librus/jquery-ui-1.9.2.custom.min.1422664051.css" type="text/css"><link rel="stylesheet" href="/js/jquery/jquery-ui-1.9.2.custom/css/librus/librus-aditional.1507325373.css" type="text/css"><script type="text/javascript" src="/js/jquery/jquery-ui-1.9.2.custom/js/jquery-1.8.3.1360569100.js"></script><script type="text/javascript" src="/js/jquery/jquery.form.1615587149.js"></script><script type="text/javascript" src="/js/jquery/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.1361447290.js"></script>        <link rel="stylesheet" href="/js/librus-component/data-table/librus-data-table.css?v2" />
+        <link rel="stylesheet" href="/js/librus-component/panel/librus-panel.css?v1" />
+        <link rel="stylesheet" href="/js/librus-component/notification/librus-notification.css?v4" />
+        <link rel="stylesheet" href="/js/librus-component/dialog/librus-dialog.css?v1" />
+        <script type="text/javascript" src="/js/newLayout/jquery.mask.min.js"></script>
+        <script type="text/javascript" src="/js/LibrusJQueryTheme.js"></script>
+        <script type="text/javascript" src="/js/rowCollection.js"></script>
+        <script type="text/javascript" src="/js/quickSearchTool.js"></script>
+        <script type="text/javascript" src="/js/CsrfProtection.js"></script>
+        <script type="text/javascript">
+            var csrfTokenName = "requestkey";
+            var csrfTokenValue = "MC4yNTU5MDAwMCAxNzQyMTQ5NzcxXzM1NjNkZmM2NWZkNDRjZWEzZDFkNTRiZWYzOTA2YmNh";
+            CSRF_PROTECTION.startAddingCsrfTokenTo($, csrfTokenName, csrfTokenValue);
+        </script>
+            <script type='text/javascript'>
+        var APP_SETTINGS = new Object();
+        Object.defineProperties(APP_SETTINGS, {
+            idw_content_domain: {
+                value: "https://synergia.indywidualni.pl",
+                enumerable: true
+            }
+        });
+    </script>
+    <script type="text/javascript" src="/js/fileValidator.1535145151.js"></script><script type="text/javascript" src="/js/CloudStorageBrowseTool.1507325373.js"></script><script type="text/javascript" src="/js/indywidualni.1666094592.js"></script><script type="text/javascript" src="/js/jquery/fancybox/jquery.fancybox-1.3.4.1332493810.js"></script><script type="text/javascript" src="/js/connectRMNToLesson.1507325373.js"></script><script type="text/javascript" src="/js/libs/redom/redom.min.1575670839.js"></script><script type="text/javascript" src="/js/libs/lodash/lodash.min.1575670839.js"></script><script type="text/javascript" src="/js/libs/moment/moment.min.1596795859.js"></script><script type="text/javascript" src="/js/libs/navigo/navigo.min.1581718575.js"></script><script type="text/javascript" src="/js/util/util.1581718575.js"></script><script type="text/javascript" src="/js/librus-component/data-table/librus-data-table.1596795859.js"></script><script type="text/javascript" src="/js/librus-component/panel/librus-panel.1581718575.js"></script><script type="text/javascript" src="/js/librus-component/notification/librus-notification.1596795859.js"></script><script type="text/javascript" src="/js/librus-component/dialog/librus-dialog.1585948224.js"></script><script type="text/javascript" src="/assets/js/synergia/services/printRegistration.min.1738848459.js"></script><script src="/js/jquery/jquery-ui-timepicker-addon.js"></script>
+    <link rel="stylesheet" href="/LibrusStyleSheet2.1738373978.css" type="text/css" media="screen">    <link rel="stylesheet" href="/LibrusPrintStyleSheet2.1495831305.css" type="text/css" media="print">    <!--[if !IE]><!-->
+    <link rel="stylesheet" href="/LibrusStyleSheet2NonIE.1361960241.css" type="text/css" media="screen">    <!--<![endif]-->
+    <!--[if IE]>
+    <link rel="stylesheet" href="/LibrusStyleSheet2IE.1615587149.css" type="text/css" media="screen">    <![endif]-->
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/LibrusStyleSheet2IE7.1371460280.css" type="text/css" media="screen">    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" href="/LibrusStyleSheet2IE8.1367217179.css" type="text/css" media="screen">    <![endif]-->
+    <!--[if IE 9]>
+    <link rel="stylesheet" href="/LibrusStyleSheet2IE9.1366628972.css" type="text/css" media="screen">    <![endif]-->
+    <link rel="stylesheet" href="/LibrusStyleSheet2Light.1637964526.css" type="text/css" media="screen"><link rel="stylesheet" href="/assets/css/synergia.1731710352.css" type="text/css" media="screen"><link rel="stylesheet" href="/assets/css/style.1679696063.css" type="text/css" media="screen"><script type="text/javascript" src="/assets/js/synergia/main.1438948866.js"></script>    <script type="text/javascript">
+        var appName1 = 'LIBRUS Synergia';
+        var appName2 = 'LIBRUS Synergia';
+        var appName3 = 'LIBRUS Synergia';
+        var appName4 = 'LIBRUS Synergia';
+        var appName5 = 'LIBRUS Synergia';
+        var appName6 = 'LIBRUS Synergia';
+        var appName7 = 'LIBRUS Synergia';
+    </script>
+
+     <link rel="stylesheet" type="text/css" media="screen" href="/jquery.treeview.css" />
+
+      <script type="text/javascript" src="/js/cookie.js"></script>
+   <script type="text/javascript" src="/js/uklad_strony2.js"></script>
+   <script type="text/javascript" src="/js/ZeroClipboard.min.js"></script>
+   <script type="text/javascript">
+       ZeroClipboard.setDefaults( { moviePath: '/swf/ZeroClipboard.swf' } );
+   </script>
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="/js/newLayout/SparkBoxSelect/sparkbox-select.css" />
+<script type="text/javascript" src="/js/newLayout/SparkBoxSelect/jquery.sparkbox-select.js" ></script>
+
+        <script src="/js/newLayout/amCharts.js" type="text/javascript"></script>
+        <script src="/js/validators.js" type="text/javascript" ></script>
+        <link rel="stylesheet" href="/assets/css/tippy/tippy.css" />
+        <link rel="stylesheet" href="/assets/css/tippy-theme.css" />
+        <script type="text/javascript" src="/assets/js/polyfilles/object-assign.min.js"></script>
+        <script type="text/javascript" src="/assets/js/polyfilles/promise-polyfill.min.js"></script>
+        <script type="text/javascript" src="/assets/js/polyfilles/find.js"></script>
+        <script type="text/javascript" src="/assets/js/popper/popper.min.js"></script>
+        <script type="text/javascript" src="/assets/js/tippy/tippy.umd.min.js"></script>
+        <script src="/js/ErrorProvider.js" type="text/javascript"></script>
+        <script src="/js/newLayout/rgbcolor.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/js/newLayout/newLayoutJS.1722422433.js"></script>        <script type="text/javascript" src="/js/newLayout/newLayoutJSExecutes.1507325373.js"></script>        <!--[if IE 7]>
+        <script type="text/javascript" src="/js/newLayout/newLayoutJSIE7.1368708313.js"></script>        <![endif]-->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/js/newLayout/newLauoutJSltIE9.1375344710.js"></script>        <![endif]-->
+        <link rel="stylesheet" href="/js/jquery/jquery.multiselect.1628259749.css" type="text/css">        <script type="text/javascript" src="/js/jquery/jquery.multiselect.1422664051.js"></script>        <script type="text/javascript" src="/assets/js/synergia/MultiselectLibrus.1565269166.js"></script>        <script type="text/javascript" src="/js/pobierz_date_wywiadowki2.1495831305.js"></script>        <script type="text/javascript" src="/js/pobierz_email4.1535749794.js"></script>
+
+ <script type="text/javascript" src="/js/ImageSwaper.js"></script>
+ </head>
+
+ <body style="min-width: 1px;" onload="ImageSwaper.GetInstance().Load(); ">
+
+
+
+<div id="page" class="no-head">
+    <div id="body" class="stretch-left stretch-right">
+<script type="text/javascript">
+    var appName1 = 'LIBRUS Synergia';
+    var appName2 = 'LIBRUS Synergia';
+    var appName3 = 'LIBRUS Synergia';
+    var appName4 = 'LIBRUS Synergia';
+    var appName5 = 'LIBRUS Synergia';
+    var appName6 = 'LIBRUS Synergia';
+    var appName7 = 'LIBRUS Synergia';
+    const SYNERGIA_API_URL = "\/gateway\/api";
+    const OTHERACTIVITIESREGISTER_API_ENDPOINT = "\/gateway\/ms\/otheractivitiesregister";
+    const INDIVIDUALLEARNINGPATH_API_ENDPOINT = "\/gateway\/ms\/individuallearningpath";
+    const ONETOONELEARNINGPLAN_API_ENDPOINT = "\/gateway\/ms\/onetoonelearningplan";
+    const isStudentTimetable = true;
+</script>
+<script type="text/javascript" src="/assets/js/polyfilles/closest.1573771542.js"></script><script type="text/javascript" src="/assets/js/polyfilles/find.1573771542.js"></script><script type="text/javascript" src="/assets/js/polyfilles/forEach.1596795859.js"></script><script type="text/javascript" src="/assets/js/polyfilles/promise-polyfill.min.1573771542.js"></script><script type="text/javascript" src="/assets/js/polyfilles/array-from.1573771542.js"></script><script type="text/javascript" src="/assets/js/polyfilles/fetch.umd.1573771542.js"></script><script type="text/javascript" src="/assets/js/polyfilles/flat.1573771542.js"></script><script type="text/javascript" src="/assets/js/polyfilles/babel-polyfill.min.1573771542.js"></script><script type="text/javascript" src="/assets/js/synergia/timetable.min.1741093818.js"></script><div class="container"><h2 class="inside">Plan lekcji w danym tygodniu</h2><span class="fold">    <a href="javascript:void(0);" class="fold-link" onclick="window.close();"><span class="fold-start">Zamknij</span><span class="fold-end"></span></a></span><span class="fold">    <a href="/eksporty/ical/eksportuj/planUcznia" class="fold-link"><span class="fold-start">Eksportuj plan do pliku kalendarza</span><span class="fold-end"></span></a></span><span class="fold">    <a href="/przegladaj_plan_pedagoga/" class="fold-link"><span class="fold-start">Rozkład zajęć (stałych) pedagoga</span><span class="fold-end"></span></a></span><div class="container-background"><FORM ACTION="/przegladaj_plan_lekcji" METHOD="POST" name="formPrzegladajPlan">    
+    <input 
+        type="hidden" 
+        name="requestkey" 
+        value="MC4yNTU5MDAwMCAxNzQyMTQ5NzcxXzM1NjNkZmM2NWZkNDRjZWEzZDFkNTRiZWYzOTA2YmNh" 
+    />
+
+            <script type="text/javascript">
+            /*
+               Function: zmienTydzien
+
+               Function changes week.
+
+               Author:
+                    Wojciech Matusiak <wojciech.matusiak[at]librus.pl>
+
+               Parameters:
+
+                    string 	step - step value.
+
+            */
+            var zmienTydzien = function(step)
+            {
+                var tygodnie = document.getElementById('tydzien');
+                var newIndex = tygodnie.selectedIndex + step;
+                if(newIndex < 0 || newIndex >= tygodnie.options.length) {
+                    return;
+                }
+
+                tygodnie.selectedIndex = newIndex;
+
+                // onchange not call this
+                turn_preloader_on();
+                formPrzegladajPlan.submit();
+            };
+        </script>
+        <table class="decorated filters small center"><thead><tr><td colspan="2">&nbsp;</td></tr></thead><tbody><tr><th colspan="2" class="center"><a href="#" onclick="zmienTydzien(-1);"><img src="/images/strzalka_lewo.gif" style="border: none; vertical-align: middle;"></a><select name="tydzien" id="tydzien" onchange="this.form.submit();"><option value="2024-09-02_2024-09-08">2024-09-02 2024-09-08</option><option value="2024-09-09_2024-09-15">2024-09-09 2024-09-15</option><option value="2024-09-16_2024-09-22">2024-09-16 2024-09-22</option><option value="2024-09-23_2024-09-29">2024-09-23 2024-09-29</option><option value="2024-09-30_2024-10-06">2024-09-30 2024-10-06</option><option value="2024-10-07_2024-10-13">2024-10-07 2024-10-13</option><option value="2024-10-14_2024-10-20">2024-10-14 2024-10-20</option><option value="2024-10-21_2024-10-27">2024-10-21 2024-10-27</option><option value="2024-10-28_2024-11-03">2024-10-28 2024-11-03</option><option value="2024-11-04_2024-11-10">2024-11-04 2024-11-10</option><option value="2024-11-11_2024-11-17">2024-11-11 2024-11-17</option><option value="2024-11-18_2024-11-24">2024-11-18 2024-11-24</option><option value="2024-11-25_2024-12-01">2024-11-25 2024-12-01</option><option value="2024-12-02_2024-12-08">2024-12-02 2024-12-08</option><option value="2024-12-09_2024-12-15">2024-12-09 2024-12-15</option><option value="2024-12-16_2024-12-22">2024-12-16 2024-12-22</option><option value="2024-12-23_2024-12-29">2024-12-23 2024-12-29</option><option value="2024-12-30_2025-01-05">2024-12-30 2025-01-05</option><option value="2025-01-06_2025-01-12">2025-01-06 2025-01-12</option><option value="2025-01-13_2025-01-19">2025-01-13 2025-01-19</option><option value="2025-01-20_2025-01-26">2025-01-20 2025-01-26</option><option value="2025-01-27_2025-02-02">2025-01-27 2025-02-02</option><option value="2025-02-03_2025-02-09">2025-02-03 2025-02-09</option><option value="2025-02-10_2025-02-16">2025-02-10 2025-02-16</option><option value="2025-02-17_2025-02-23">2025-02-17 2025-02-23</option><option value="2025-02-24_2025-03-02">2025-02-24 2025-03-02</option><option value="2025-03-03_2025-03-09">2025-03-03 2025-03-09</option><option value="2025-03-10_2025-03-16" selected="selected">2025-03-10 2025-03-16</option><option value="2025-03-17_2025-03-23">2025-03-17 2025-03-23</option><option value="2025-03-24_2025-03-30">2025-03-24 2025-03-30</option><option value="2025-03-31_2025-04-06">2025-03-31 2025-04-06</option><option value="2025-04-07_2025-04-13">2025-04-07 2025-04-13</option><option value="2025-04-14_2025-04-20">2025-04-14 2025-04-20</option><option value="2025-04-21_2025-04-27">2025-04-21 2025-04-27</option><option value="2025-04-28_2025-05-04">2025-04-28 2025-05-04</option><option value="2025-05-05_2025-05-11">2025-05-05 2025-05-11</option><option value="2025-05-12_2025-05-18">2025-05-12 2025-05-18</option><option value="2025-05-19_2025-05-25">2025-05-19 2025-05-25</option><option value="2025-05-26_2025-06-01">2025-05-26 2025-06-01</option><option value="2025-06-02_2025-06-08">2025-06-02 2025-06-08</option><option value="2025-06-09_2025-06-15">2025-06-09 2025-06-15</option><option value="2025-06-16_2025-06-22">2025-06-16 2025-06-22</option><option value="2025-06-23_2025-06-29">2025-06-23 2025-06-29</option></select><a href="#" onclick="zmienTydzien(1);"><img src="/images/strzalka_prawo.gif" style="border: none; vertical-align: middle;"></a></th></tr><tr><th style="min-width: 230px">Zindywidualizowana ścieżka kształcenia</th><td><input type="checkbox" name="pokaz_zajecia_zsk" id="pokaz_zajecia_zsk" onchange="turn_preloader_on();this.form.submit();" checked></td></tr><tr><th>Nauczanie indywidualne</th><td colspan="4"><input type="checkbox" name="pokaz_zajecia_ni" id="pokaz_zajecia_ni" onchange="turn_preloader_on();this.form.submit();" checked></td></tr><tr><th>Zajęcia dodatkowe</th><td colspan="4"><input type="checkbox" name="pokaz_zajecia_dzd" id="pokaz_zajecia_dzd" onchange="turn_preloader_on();toggleDzdCheckbox();" /></tbody></table><table class="decorated plan-lekcji"><thead><tr><td class="tiny">Nr&nbsp;lekcji</td><td>Godziny</td><td>Poniedziałek<BR />2025-03-10</td><td>Wtorek<BR />2025-03-11</td><td>Środa<BR />2025-03-12</td><td>Czwartek<BR />2025-03-13</td><td>Piątek<BR />2025-03-14</td><td>Sobota<BR />2025-03-15</td><td>Niedziela<BR />2025-03-16</td><td class="border-right">Nr&nbsp;lekcji</td></tr></thead><tr class="line1"><td class="center" style="height: 50px;" >0</td><th class="center border-top" NOWRAP>07:05&nbsp;-&nbsp;07:50</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="07:05"
+                            data-time_to="07:50"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="07:05"
+                            data-time_to="07:50"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="07:05"
+                            data-time_to="07:50"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="07:05"
+                            data-time_to="07:50"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="07:05"
+                            data-time_to="07:50"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="07:05"
+                            data-time_to="07:50"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="07:05"
+                            data-time_to="07:50"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >0</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">07:50&nbsp;-&nbsp;08:00</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >1</td><th class="center border-top" NOWRAP>08:00&nbsp;-&nbsp;08:45</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="08:00"
+                            data-time_to="08:45"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Geografia</b>
+                                                        <br/>-Różańska&nbsp;Svitlana&nbsp&nbsp;s.&nbsp;158</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="08:00"
+                            data-time_to="08:45"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="08:00"
+                            data-time_to="08:45"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Organizacja przewozów pasażerskich i towarowych</b><br/>- SKM&nbsp;_GRZEGORZ&nbsp;(3tk SKM)</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="08:00"
+                            data-time_to="08:45"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Przygotowanie praktyczne do zawodu maszynisty</b>
+                                                        <br/>-Madej&nbsp;Krzysztof&nbsp&nbsp;s.&nbsp;16</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="08:00"
+                            data-time_to="08:45"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Obsługa urządzeń sterowania ruchem kolejowym i łączności</b><br/>- Markowicz&nbsp;Jerzy&nbsp;(3tk 1. Grupa)&nbsp&nbsp;s.&nbsp;16</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="08:00"
+                            data-time_to="08:45"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="08:00"
+                            data-time_to="08:45"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >1</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">08:45&nbsp;-&nbsp;08:50</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >2</td><th class="center border-top" NOWRAP>08:50&nbsp;-&nbsp;09:35</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="08:50"
+                            data-time_to="09:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Historia</b>
+                                                        <br/>-Kietliński&nbsp;Grzegorz&nbsp&nbsp;s.&nbsp;208</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="08:50"
+                            data-time_to="09:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Biologia</b>
+                                                        <br/>-Pastuszko&nbsp;Aleksandra&nbsp&nbsp;s.&nbsp;212</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="08:50"
+                            data-time_to="09:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Organizacja przewozów pasażerskich i towarowych</b><br/>- SKM&nbsp;_GRZEGORZ&nbsp;(3tk SKM)</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="08:50"
+                            data-time_to="09:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Przygotowanie praktyczne do zawodu maszynisty</b>
+                                                        <br/>-Madej&nbsp;Krzysztof&nbsp&nbsp;s.&nbsp;16</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="08:50"
+                            data-time_to="09:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Obsługa urządzeń sterowania ruchem kolejowym i łączności</b><br/>- Markowicz&nbsp;Jerzy&nbsp;(3tk 1. Grupa)&nbsp&nbsp;s.&nbsp;16</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="08:50"
+                            data-time_to="09:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="08:50"
+                            data-time_to="09:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >2</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">09:35&nbsp;-&nbsp;09:45</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >3</td><th class="center border-top" NOWRAP>09:45&nbsp;-&nbsp;10:30</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="09:45"
+                            data-time_to="10:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Informatyka</b><br/>- Gil&nbsp;Piotr&nbsp;(3tk 1. Grupa)&nbsp&nbsp;s.&nbsp;225</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="09:45"
+                            data-time_to="10:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Język polski</b>
+                                                        <br/>-Woźniak&nbsp;Anna&nbsp&nbsp;s.&nbsp;213</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="09:45"
+                            data-time_to="10:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Obsługa pasażerów i ładunków</b><br/>- SKM&nbsp;_GRZEGORZ&nbsp;(3tk SKM)</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="09:45"
+                            data-time_to="10:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Język angielski</b><br/>- Równa&nbsp;Diana&nbsp;(3tk 1. Grupa)&nbsp&nbsp;s.&nbsp;201</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="09:45"
+                            data-time_to="10:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><a href="javascript:void(0);" title="<b>Data:</b> 2025-03-14<br><b>Nr lekcji:</b> 3<br><b>Klasa:</b> 3tk T7<br><b>Nauczyciel:</b> Tatchyn Lidia -> Laskowska Marta<br><b>Przedmiot:</b> Matematyka -> Zajęcia z wychowawcą/godziny z wychowawcą<br><b>Sala:</b> 214 -> 203<br><b>Data dodania:</b>&nbsp;2025-03-14 pt."><div class="center plan-lekcji-info"> zastępstwo </div></a><div class="text"><b>Zajęcia z wychowawcą/godziny z wychowawcą</b><br/>- Laskowska&nbsp;Marta&nbsp&nbsp;s.&nbsp;203</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="09:45"
+                            data-time_to="10:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="09:45"
+                            data-time_to="10:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >3</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">10:30&nbsp;-&nbsp;10:40</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >4</td><th class="center border-top" NOWRAP>10:40&nbsp;-&nbsp;11:25</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="10:40"
+                            data-time_to="11:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Język angielski</b><br/>- Równa&nbsp;Diana&nbsp;(3tk 1. Grupa)&nbsp&nbsp;s.&nbsp;201</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="10:40"
+                            data-time_to="11:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Język polski</b>
+                                                        <br/>-Woźniak&nbsp;Anna&nbsp&nbsp;s.&nbsp;213</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="10:40"
+                            data-time_to="11:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Obsługa pasażerów i ładunków</b><br/>- SKM&nbsp;_GRZEGORZ&nbsp;(3tk SKM)</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="10:40"
+                            data-time_to="11:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Język niemiecki</b><br/>- Chojnacka&nbsp;Olga&nbsp;(3tk 1. Grupa)&nbsp&nbsp;s.&nbsp;157</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="10:40"
+                            data-time_to="11:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Wychowanie fizyczne</b>
+                                                        <br/>-Wiktorzak&nbsp;Marcin&nbsp&nbsp;s.&nbsp;wf_7</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="10:40"
+                            data-time_to="11:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="10:40"
+                            data-time_to="11:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >4</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">11:25&nbsp;-&nbsp;11:45</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >5</td><th class="center border-top" NOWRAP>11:45&nbsp;-&nbsp;12:30</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="11:45"
+                            data-time_to="12:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><a href="javascript:void(0);" title="<b>Data:</b> 2025-03-10<br><b>Nr lekcji:</b> 5<br><b>Klasa:</b> 3tk T7<br><b>Nauczyciel:</b> Pastuszko Aleksandra -> Stachyra Roman<br><b>Przedmiot:</b> Biologia -> Przygotowanie praktyczne do zawodu maszynisty<br><b>Sala:</b> 212 -> 14<br><b>Data dodania:</b>&nbsp;2025-03-10 pon."><div class="center plan-lekcji-info"> zastępstwo </div></a><div class="text"><b>Przygotowanie praktyczne do zawodu maszynisty</b><br/>- Stachyra&nbsp;Roman&nbsp&nbsp;s.&nbsp;14</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="11:45"
+                            data-time_to="12:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Matematyka</b>
+                                                        <br/>-Tatchyn&nbsp;Lidia&nbsp&nbsp;s.&nbsp;214</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="11:45"
+                            data-time_to="12:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Technologia i organizacja pracy stacji</b><br/>- SKM&nbsp;_GRZEGORZ&nbsp;(3tk SKM)</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="11:45"
+                            data-time_to="12:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Przygotowanie praktyczne do zawodu maszynisty</b>
+                                                        <br/>-Madej&nbsp;Krzysztof&nbsp&nbsp;s.&nbsp;16</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="11:45"
+                            data-time_to="12:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Język niemiecki</b><br/>- Chojnacka&nbsp;Olga&nbsp;(3tk 1. Grupa)&nbsp&nbsp;s.&nbsp;157</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="11:45"
+                            data-time_to="12:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="11:45"
+                            data-time_to="12:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >5</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">12:30&nbsp;-&nbsp;12:50</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >6</td><th class="center border-top" NOWRAP>12:50&nbsp;-&nbsp;13:35</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="12:50"
+                            data-time_to="13:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Podstawy przedsiębiorczości</b>
+                                                        <br/>-Różańska&nbsp;Svitlana&nbsp&nbsp;s.&nbsp;158</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="12:50"
+                            data-time_to="13:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Zajęcia z wychowawcą/godziny z wychowawcą</b>
+                                                        <br/>-Wiktorzak&nbsp;Marcin&nbsp&nbsp;s.&nbsp;203</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="12:50"
+                            data-time_to="13:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Technologia i organizacja pracy stacji</b><br/>- SKM&nbsp;_GRZEGORZ&nbsp;(3tk SKM)</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="12:50"
+                            data-time_to="13:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Przygotowanie praktyczne do zawodu maszynisty</b>
+                                                        <br/>-Madej&nbsp;Krzysztof&nbsp&nbsp;s.&nbsp;16</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="12:50"
+                            data-time_to="13:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Informatyka</b><br/>- Gil&nbsp;Piotr&nbsp;(3tk 1. Grupa)&nbsp&nbsp;s.&nbsp;225</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="12:50"
+                            data-time_to="13:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="12:50"
+                            data-time_to="13:35"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >6</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">13:35&nbsp;-&nbsp;13:45</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >7</td><th class="center border-top" NOWRAP>13:45&nbsp;-&nbsp;14:30</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="13:45"
+                            data-time_to="14:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Wychowanie fizyczne</b>
+                                                        <br/>-Wiktorzak&nbsp;Marcin&nbsp&nbsp;s.&nbsp;wf_7</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="13:45"
+                            data-time_to="14:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="13:45"
+                            data-time_to="14:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="13:45"
+                            data-time_to="14:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text"><b>Informatyka</b><br/>- Gil&nbsp;Piotr&nbsp;(3tk 1. Grupa)&nbsp&nbsp;s.&nbsp;225</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="13:45"
+                            data-time_to="14:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Historia i terazniejszość</b>
+                                                        <br/>-Kowalczyk&nbsp;Dawid&nbsp&nbsp;s.&nbsp;220</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="13:45"
+                            data-time_to="14:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="13:45"
+                            data-time_to="14:30"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >7</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">14:30&nbsp;-&nbsp;14:40</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >8</td><th class="center border-top" NOWRAP>14:40&nbsp;-&nbsp;15:25</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="14:40"
+                            data-time_to="15:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Matematyka</b>
+                                                        <br/>-Tatchyn&nbsp;Lidia&nbsp&nbsp;s.&nbsp;214</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="14:40"
+                            data-time_to="15:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Wychowanie fizyczne</b>
+                                                        <br/>-Wiktorzak&nbsp;Marcin&nbsp&nbsp;s.&nbsp;wf_7</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="14:40"
+                            data-time_to="15:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="14:40"
+                            data-time_to="15:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="14:40"
+                            data-time_to="15:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Język polski</b>
+                                                        <br/>-Woźniak&nbsp;Anna&nbsp&nbsp;s.&nbsp;213</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="14:40"
+                            data-time_to="15:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="14:40"
+                            data-time_to="15:25"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >8</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">15:25&nbsp;-&nbsp;15:30</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >9</td><th class="center border-top" NOWRAP>15:30&nbsp;-&nbsp;16:15</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="15:30"
+                            data-time_to="16:15"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="15:30"
+                            data-time_to="16:15"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap><div class="text">
+                                                        <b>Geografia</b>
+                                                        <br/>-Różańska&nbsp;Svitlana&nbsp&nbsp;s.&nbsp;158</div></td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="15:30"
+                            data-time_to="16:15"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="15:30"
+                            data-time_to="16:15"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="15:30"
+                            data-time_to="16:15"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="15:30"
+                            data-time_to="16:15"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="15:30"
+                            data-time_to="16:15"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >9</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">16:15&nbsp;-&nbsp;16:20</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >10</td><th class="center border-top" NOWRAP>16:20&nbsp;-&nbsp;17:05</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="16:20"
+                            data-time_to="17:05"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="16:20"
+                            data-time_to="17:05"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="16:20"
+                            data-time_to="17:05"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="16:20"
+                            data-time_to="17:05"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="16:20"
+                            data-time_to="17:05"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="16:20"
+                            data-time_to="17:05"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="16:20"
+                            data-time_to="17:05"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >10</td></tr><tr class="line0" ><td style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td><td class="center" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; font-size: 10px;">17:05&nbsp;-&nbsp;17:10</td><td colspan="9" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;"></td></tr><tr class="line1"><td class="center" style="height: 50px;" >11</td><th class="center border-top" NOWRAP>17:10&nbsp;-&nbsp;17:55</th><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-10"
+                            data-time_from="17:10"
+                            data-time_to="17:55"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-11"
+                            data-time_from="17:10"
+                            data-time_to="17:55"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-12"
+                            data-time_from="17:10"
+                            data-time_to="17:55"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-13"
+                            data-time_from="17:10"
+                            data-time_to="17:55"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-14"
+                            data-time_from="17:10"
+                            data-time_to="17:55"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-15"
+                            data-time_from="17:10"
+                            data-time_to="17:55"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="line1" 
+                            id="timetableEntryBox"
+                            data-date="2025-03-16"
+                            data-time_from="17:10"
+                            data-time_to="17:55"
+NOWRAP style="padding: 0px; min-height: 40px; vertical-align: top;" nowrap>&nbsp;</td><td class="center tiny border-right" >11</td></tr><tfoot><tr><td colspan="11">&nbsp;</td></tr></tfoot></table></div></FORM></div></div>        </div>
+    </div>
+   <script type="text/javascript" src="/wz_dragdrop.js"></script>
+   <script type="text/javascript">
+	<!--
+	SET_DHTML("interfejs"+TRANSPARENT, "interfejsmenu"+NO_DRAG, "interfejsmenu_naglowek"+NO_DRAG, "interfejsSubmenu"+TRANSPARENT, "interfejsSubmenu_naglowek"+NO_DRAG, "interfejsSubmenu_body"+NO_DRAG);
+	//-->
+	</script>
+    </body>
+    </html>
+  
