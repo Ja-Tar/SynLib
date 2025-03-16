@@ -104,7 +104,6 @@ const Strona = {
 
             // div z przywitaniem
             var headline = document.createElement('div');
-            headline.className = 'headline';
             headline.innerHTML = `Witaj ${JSON.parse(sessionStorage.getItem('Me')).FirstName}!`;
 
             // Licznik dni do końca roku szkolnego i roku kalendarzowego
@@ -239,6 +238,7 @@ const Strona = {
             stle => GM.addStyle(stle)
         );
         applyColors();
+        addSwipeNavigation(); // P68ac
     },
     Zadania() {
         return; // TODO Wygląd zadań
@@ -674,3 +674,44 @@ const resizeTable = () => {
 
 window.addEventListener('resize', resizeTable);
 resizeTable();
+
+// P68ac: Implement swipe navigation to navigate between days on mobile devices
+function addSwipeNavigation() {
+    const timetable = document.querySelector('.plan-lekcji');
+    let touchstartX = 0;
+    let touchendX = 0;
+
+    timetable.addEventListener('touchstart', function (event) {
+        touchstartX = event.changedTouches[0].screenX;
+    }, false);
+
+    timetable.addEventListener('touchend', function (event) {
+        touchendX = event.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+        if (touchendX < touchstartX) {
+            navigateToNextDay();
+        }
+        if (touchendX > touchstartX) {
+            navigateToPreviousDay();
+        }
+    }
+
+    function navigateToNextDay() {
+        const currentDayColumn = document.querySelector('.plan-lekcji th:not([style*="display: none"])');
+        if (currentDayColumn && currentDayColumn.nextElementSibling) {
+            currentDayColumn.style.display = 'none';
+            currentDayColumn.nextElementSibling.style.display = '';
+        }
+    }
+
+    function navigateToPreviousDay() {
+        const currentDayColumn = document.querySelector('.plan-lekcji th:not([style*="display: none"])');
+        if (currentDayColumn && currentDayColumn.previousElementSibling) {
+            currentDayColumn.style.display = 'none';
+            currentDayColumn.previousElementSibling.style.display = '';
+        }
+    }
+}

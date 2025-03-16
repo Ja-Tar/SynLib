@@ -209,3 +209,11 @@ table.decorated .przesuniete {
 		min-width: 100%;
 	}
 }
+
+/* P96e7: Add media queries to adjust the display for mobile devices */
+@media (max-width: 768px) {
+	table.decorated th:nth-child(n+3):nth-child(-n+7),
+	table.decorated td:nth-child(n+3):nth-child(-n+7) {
+		display: none;
+	}
+}
