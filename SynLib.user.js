@@ -626,19 +626,34 @@ function applyColors() {
         entry.innerHTML = '';
         entry.appendChild(highlightDiv);
 
-        // Dodaj klasy CSS dla odwołanych i przesuniętych lekcji
-        if (timetableEntryBox.querySelector('.plan-lekcji-info')) {
-            if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('zastępstwo')) {
-                entry.classList.add('zastepstwo');
-            } else if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('odwołane')) {
-                entry.classList.add('odwolane');
-            } else if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('przesunięcie')) {
-                entry.classList.add('przesuniete');
-            } else if (timetableEntryBox.querySelector('.plan-lekcji-info').textContent.includes('miejsce przesunięcia')) {
-                entry.classList.add('miejsce-przesuniecia');
+        
+        addClassesWhenWord(timetableEntryBox, ".plan-lekcji-info", entry, {
+            "zastępstwo": "zastepstwo",
+            "odwołane": "odwolane",
+            "przesunięcie": "przesuniete",
+            "miejsce przesunięcia": 'miejsce-przesuniecia'
+        })
+    });
+
+    /**
+     * @param {Element} mainElement
+     * @param {string} classSelectorToSearch
+     * @param {Element} addToElement
+     * @param {Object.<string, string>}  wordToName 
+     */
+    function addClassesWhenWord(mainElement, elementToSearch, addToElement, wordToName) {
+        const element = mainElement.querySelector(elementToSearch);
+        if (element) {
+            for (const wordKey in wordToName) {
+                if (!Object.hasOwn(wordToName, wordKey)) continue;
+                
+                if (element.textContent.includes(wordKey)) {
+                    const classToAdd = wordToName[wordKey];
+                    addToElement.classList.add(classToAdd);
+                }
             }
         }
-    });
+    }
 
     function getColorForSubject(subject) {
         if (!colors[subject]) {
