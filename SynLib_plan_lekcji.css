@@ -153,7 +153,7 @@ table.decorated .zastepstwo {
 }
 
 /* Pasy szare i przezroczystość dla odwołanych lekcji */
-table.decorated .odwolane {
+table.decorated .odwolane, table.decorated .wolny {
 	background: repeating-linear-gradient(45deg,
 			rgba(0, 0, 0, 1),
 			rgba(0, 0, 0, 1) 7px,

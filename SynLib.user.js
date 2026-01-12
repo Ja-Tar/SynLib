@@ -631,7 +631,8 @@ function applyColors() {
             "zastępstwo": "zastepstwo",
             "odwołane": "odwolane",
             "przesunięcie": "przesuniete",
-            "miejsce przesunięcia": 'miejsce-przesuniecia'
+            "miejsce przesunięcia": 'miejsce-przesuniecia',
+            "dzień wolny": 'wolny'
         })
     });
 
